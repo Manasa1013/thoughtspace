@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { Routes, Route } from "react-router";
+
+import { Login, Signup } from "./Components";
+import { Home } from "./Pages/Home";
+import "./App.css";
+import { useToast } from "./Contexts/ToastContext";
 
 function App() {
+  const { toast, hideToastBar } = useToast();
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      if (toast.isVisible === "show") {
+        hideToastBar();
+        // setIsLoading(false);
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [toast, hideToastBar]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="*" element={<Home />}></Route>
+      </Routes>
     </div>
   );
 }

@@ -15,4 +15,13 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
+  {
+    _id: "7fd08cd0-1952-4fdf-bf04-2fcc87d2ad49",
+    firstName: "Taylor",
+    lastName: "Swift",
+    username: "Taylor_Swift",
+    password: "Taylor@1",
+    createdAt: "2023-06-28T22:27:23+05:30",
+    updatedAt: "2023-06-28T22:27:23+05:30",
+  },
 ];

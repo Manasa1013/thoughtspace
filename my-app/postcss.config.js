@@ -4,3 +4,4 @@ module.exports = {
     autoprefixer: {},
   },
 }
+    // "@babel/plugin-proposal-private-property-in-object" : ""
