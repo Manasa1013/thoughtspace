@@ -154,7 +154,7 @@ export function Login() {
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={showLoginPassword ? "text" : "password"}
                 value={loginField.password}
                 autoComplete="current-password"
                 required
@@ -186,6 +186,23 @@ export function Login() {
               </p>
             </div>
           </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="show-password"
+                name="show-password"
+                type="checkbox"
+                onChange={() => setShowLoginPassword((prev) => !prev)}
+                className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+              />
+              <label
+                htmlFor="show-password"
+                className="ml-2 block text-sm text-gray-900"
+              >
+                Show password
+              </label>
+            </div>
+          </div>
           <div>
             <button
               type="button"
@@ -202,7 +219,6 @@ export function Login() {
               Log in as Guest
             </button>
           </div>
-          <div className="flex items-center justify-between"></div>
 
           <div>
             <button

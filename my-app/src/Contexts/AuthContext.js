@@ -1,6 +1,6 @@
 import axios from "axios";
-import { createContext, useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { createContext, useContext, useEffect, useState } from "react";
+import { json, useLocation, useNavigate } from "react-router";
 
 import { useToast } from "./ToastContext";
 export const AuthContext = createContext();
@@ -13,8 +13,18 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [auth, setAuth] = useState({
-    token: "",
-    user: {},
+    token: localStorage.getItem("token") ?? "",
+    user: {
+      firstName: JSON.parse(localStorage.getItem("user"))
+        ? JSON.parse(localStorage.getItem("user"))?.firstName
+        : "",
+      lastName: JSON.parse(localStorage.getItem("user"))
+        ? JSON.parse(localStorage.getItem("user"))?.lastName
+        : "",
+      username: JSON.parse(localStorage.getItem("user"))
+        ? JSON.parse(localStorage.getItem("user"))?.username
+        : "",
+    },
   });
   const [field, setField] = useState({
     firstName: "",
@@ -28,8 +38,7 @@ export function AuthProvider({ children }) {
     password: "",
   });
   const { showToastBar } = useToast();
-  // const { setIsLoading } = useProduct();
-  // console.log(setIsLoading);
+
   async function logoutHandler() {
     try {
       localStorage.removeItem("token");
@@ -64,7 +73,6 @@ export function AuthProvider({ children }) {
             ...prev.user,
             firstName: data.foundUser.firstName,
             lastName: data.foundUser.lastName,
-            email: data.foundUser.email,
             username: data.foundUser.username,
           },
         }));

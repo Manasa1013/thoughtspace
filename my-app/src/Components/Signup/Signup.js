@@ -92,7 +92,7 @@ export const Signup = () => {
     <div className="flex min-h-full items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
-          <h2 className="mt-1 text-center text-3xl font-bold tracking-tight text-gray-900">
+          <h2 className="mt-1 text-center text-3xl font-bold tracking-tight text-teal-700">
             Sign up
           </h2>
         </div>
@@ -231,7 +231,7 @@ export const Signup = () => {
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={field.password}
                 autoComplete="current-password"
                 required
@@ -263,7 +263,23 @@ export const Signup = () => {
               </p>
             </div>
           </div>
-
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="show-password"
+                name="show-password"
+                type="checkbox"
+                onChange={() => setShowPassword((prev) => !prev)}
+                className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+              />
+              <label
+                htmlFor="show-password"
+                className="ml-2 block text-sm text-gray-900"
+              >
+                Show password
+              </label>
+            </div>
+          </div>
           <div>
             <button
               type="submit"
