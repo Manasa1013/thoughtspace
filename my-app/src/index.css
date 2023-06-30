@@ -129,7 +129,10 @@ body {
 .button__Link:hover {
   text-decoration: underline;
 }
-
+.icon--button {
+  padding: 0.13rem 0.25rem;
+  border: none;
+}
 .input-card {
   align-items: center;
   display: flex;

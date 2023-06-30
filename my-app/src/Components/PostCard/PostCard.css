@@ -1,0 +1,17 @@
+.post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.post-desc {
+    word-wrap: break-word;
+}
+
+.my-4 {
+    margin: 1rem 0;
+}
+
+.bg-purple {
+    background: var(--purple-600);
+}

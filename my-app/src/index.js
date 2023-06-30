@@ -8,6 +8,7 @@ import { makeServer } from "./server";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Contexts/AuthContext";
 import { ToastProvider } from "./Contexts/ToastContext";
+import { PostProvider } from "./Contexts/PostContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,7 +16,9 @@ root.render(
     <Router>
       <ToastProvider>
         <AuthProvider>
-          <App />
+          <PostProvider>
+            <App />
+          </PostProvider>
         </AuthProvider>
       </ToastProvider>
     </Router>
