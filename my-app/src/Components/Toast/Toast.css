@@ -1,29 +1,3 @@
-.toast {
-    background-color: var(--secondary-white);
-    color: var(--emerald-700);
-    padding: 0.75rem 1rem 0.5rem 1rem;
-    border-radius: 0.125rem;
-    position: fixed;
-    top: 85%;
-    left: 10%;
-    max-width: 80%;
-    right: 10%;
-    text-align: left;
-    z-index: 10;
-    border-bottom: 4px solid var(--emerald-700);
-}
-
-.icon--xmark {
-    height: 2rem;
-    width: 1.7rem;
-    text-align: center;
-    border-radius: 10%;
-    background-color: var(--secondary-white);
-    color: var(--emerald-700);
-    border: none;
-    opacity: 1;
-    font-size: medium;
-}
 
 .icon--button {
     background-color: inherit;

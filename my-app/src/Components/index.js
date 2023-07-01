@@ -5,6 +5,8 @@ import { Signup } from "./Signup/Signup";
 import { PostCard } from "./PostCard/PostCard";
 import { NewPost } from "./NewPost/NewPost";
 import { PostList } from "./PostList/PostList";
+import { PostDetails } from "./PostDetails/PostDetails";
+
 import { UserProfile } from "./UserProfile/UserProfile";
 
 export {
@@ -15,5 +17,6 @@ export {
   PostCard,
   NewPost,
   PostList,
+  PostDetails,
   UserProfile,
 };

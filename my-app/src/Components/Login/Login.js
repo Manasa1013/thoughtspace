@@ -74,10 +74,24 @@ export function Login() {
       }
     } catch (err) {
       console.error(err, "error while logging in");
+      showToastBar("Username or Password doesn't match");
     }
     // return validFieldID;
   }
-
+  async function guestLoginSubmitHandler(loginField) {
+    try {
+      let user = loginField;
+      let res = await loginHandler(user);
+      if (res.status === 200) {
+        console.log(res, "at login component");
+        showToastBar("Successfully logged in");
+        resetLoginValues();
+      }
+    } catch (err) {
+      console.error(err, "error while logging in");
+      showToastBar("Username or Password doesn't match");
+    }
+  }
   function resetLoginValues() {
     setLoginField((prev) => ({
       ...prev,
@@ -88,7 +102,7 @@ export function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log("login");
+    console.log("login");
     loginSubmitHandler();
   }
   return (
@@ -213,7 +227,10 @@ export function Login() {
                   username: "Taylor_Swift",
                   password: "Taylor@1",
                 }));
-                handleSubmit(e);
+                guestLoginSubmitHandler({
+                  username: "Taylor_Swift",
+                  password: "Taylor@1",
+                });
               }}
             >
               Log in as Guest

@@ -33,26 +33,37 @@ export const Signup = () => {
 
     submitHandler();
   }
-  function submitHandler() {
-    if (
-      errorField.firstNameError.length > 0 ||
-      errorField.lastNameError.length > 0 ||
-      errorField.userNameError.length > 0 ||
-      errorField.passwordError.length > 0
-    ) {
-      showToastBar("Please correct errors at the fields");
-      return;
-    } else if (
-      field.firstName.length <= 0 ||
-      field.lastName.length <= 0 ||
-      field.username.length <= 0 ||
-      field.password.length <= 0
-    ) {
-      showToastBar("Please enter details");
-      return;
-    } else {
-      signupHandler();
-      resetValues();
+  async function submitHandler() {
+    try {
+      if (
+        errorField.firstNameError.length > 0 ||
+        errorField.lastNameError.length > 0 ||
+        errorField.userNameError.length > 0 ||
+        errorField.passwordError.length > 0
+      ) {
+        showToastBar("Please correct errors at the fields");
+        return;
+      } else if (
+        field.firstName.length <= 0 ||
+        field.lastName.length <= 0 ||
+        field.username.length <= 0 ||
+        field.password.length <= 0
+      ) {
+        showToastBar("Please enter details");
+        return;
+      } else {
+        let user = field;
+        let res = await signupHandler(user);
+        console.log({ res });
+        if (res.status === 201) {
+          console.log(res, "at signup component");
+          showToastBar("Successfully signed up");
+          resetValues();
+        }
+      }
+    } catch (err) {
+      console.error(err, "at signing up");
+      showToastBar("Error! Try signing up again");
     }
   }
   function resetValues() {

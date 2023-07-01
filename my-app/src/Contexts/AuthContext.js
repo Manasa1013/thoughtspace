@@ -122,7 +122,7 @@ export function AuthProvider({ children }) {
         navigate(location?.state ? location?.state?.from?.pathname : "/", {
           replace: true,
         });
-        return response.data;
+        return response;
       } else {
         console.log("failure", response);
       }

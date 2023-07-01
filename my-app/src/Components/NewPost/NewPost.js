@@ -113,7 +113,10 @@ export function NewPost() {
                 className="bg-teal-700 p-8 py-2 text-slate-100 rounded-sm outline-teal-200 outline-offset-0"
                 onClick={() => {
                   if (auth.token) {
-                    createPostHandler(post);
+                    if (post.content === "" && post.image === null) {
+                      showToastBar("Write something to post");
+                      return;
+                    } else createPostHandler(post);
                     setPost((prev) => ({ ...prev, content: "", image: null }));
                   } else showToastBar("Login to Post");
                 }}
