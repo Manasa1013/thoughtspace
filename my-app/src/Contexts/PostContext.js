@@ -37,6 +37,23 @@ export function PostProvider({ children }) {
       setIsLoading(() => true);
     }
   }
+
+  async function fetchSinglePost(postId) {
+    try {
+      setIsLoading(() => true);
+      const response = await fetch(`/api/posts/${postId}`);
+      console.log({ response });
+      const { post } = await response.json();
+      if (response.status === 200) {
+        console.log({ post }, "at fetch single post");
+        return post;
+      }
+    } catch (err) {
+      console.error(err, "error at fetching single post");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
   async function createPostHandler(post) {
     try {
       setIsLoading(() => true);
@@ -58,6 +75,27 @@ export function PostProvider({ children }) {
       setIsLoading(() => false);
     }
   }
+  async function editPostHandler(post) {
+    try {
+      setIsLoading(() => true);
+      console.log({ post });
+      const response = await fetch("/api/posts/edit/:postId", {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ postData: post }),
+      });
+      console.log({ response });
+      const { posts } = await response.json();
+      if (response.status === 201) {
+        console.log({ posts });
+        dispatch({ type: "EDIT_POST", payload: posts });
+      }
+    } catch (err) {
+      console.error(err, "error at editing posts");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
   const [state, dispatch] = useReducer(PostReducer, {
     posts: [],
   });
@@ -66,7 +104,14 @@ export function PostProvider({ children }) {
   }, []);
   return (
     <PostContext.Provider
-      value={{ state, dispatch, fetchPosts, createPostHandler }}
+      value={{
+        state,
+        dispatch,
+        fetchPosts,
+        fetchSinglePost,
+        createPostHandler,
+        editPostHandler,
+      }}
     >
       {children}
     </PostContext.Provider>

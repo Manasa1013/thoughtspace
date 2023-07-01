@@ -4,6 +4,9 @@ export function PostReducer(state, action) {
       return { ...state, posts: action.payload };
     case "ADD_POST":
       return { ...state, posts: action.payload };
+    case "EDIT_POST":
+      return { ...state, posts: action.payload };
+
     default:
       return state;
   }

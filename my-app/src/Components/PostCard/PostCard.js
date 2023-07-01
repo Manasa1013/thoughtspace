@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
-import { getDateText, getTrimmed } from "../../utils/CommonFunctions";
-
-import "./PostCard.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { useAuth } from "../../Contexts/AuthContext";
+import { getDateText, getTrimmed } from "../../utils/CommonFunctions";
+import "./PostCard.css";
 export function PostCard({ post: postData }) {
   const {
     _id: postId,
@@ -13,6 +14,9 @@ export function PostCard({ post: postData }) {
     createdAt,
     updatedAt,
   } = postData;
+  const {
+    auth: { user },
+  } = useAuth();
   const [openOptionsModal, setOpenOptionsModal] = useState(false);
   return (
     <div className="flex flex-row bg-white gap-2 my-4 ">
@@ -32,54 +36,89 @@ export function PostCard({ post: postData }) {
                 createdAt
               )}`}</p>
             </div>
-            <button
-              className="px-2 icon--button text-teal-700"
-              onClick={() => {
-                console.log("modal open");
-                setOpenOptionsModal((prev) => !prev);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                />
-              </svg>
-            </button>
-            <div
-              className={
-                openOptionsModal
-                  ? `flex flex-col gap-1 absolute top-7 border-teal-50 border-2 bg-white right-2`
-                  : `flex flex-col gap-1 absolute top-7 border-teal-50 border-2 bg-white right-2 invisible`
-              }
-            >
-              <button
-                type="button"
-                className="button-primary p-3 border-teal-50"
-              >
-                Edit
-              </button>
-              <button
-                type="button"
-                className="button-primary p-3 border-teal-50"
-              >
-                Delete
-              </button>
-            </div>
+            {user?.username === username ? (
+              <>
+                <button
+                  className="px-2 icon--button text-teal-700"
+                  onClick={() => {
+                    console.log("modal open", postId);
+                    setOpenOptionsModal((prev) => !prev);
+                  }}
+                >
+                  {openOptionsModal ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                      />
+                    </svg>
+                  )}
+                </button>
+                <div
+                  className={
+                    openOptionsModal
+                      ? `flex flex-col gap-1 absolute top-7 border-teal-50 border-2 bg-white right-2`
+                      : `flex flex-col gap-1 absolute top-7 border-teal-50 border-2 bg-white right-2 invisible`
+                  }
+                >
+                  <button
+                    type="button"
+                    className="button-primary p-3 border-teal-50"
+                    onClick={() => {
+                      setOpenOptionsModal(() => false);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className="button-primary p-3 border-teal-50"
+                    onClick={() => {
+                      setOpenOptionsModal(() => false);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>{" "}
+              </>
+            ) : (
+              ""
+            )}
           </div>
           <div className="break-all">
             <div className="text-teal-800 text-sm text-left">
               <Link to="/users">{`@${username}`}</Link>
             </div>
-            {postDescription ? getTrimmed(postDescription, 15) : "No content"}
+            <Link to={`/posts/${postId}`}>
+              <p className="leading-2">
+                {postDescription
+                  ? getTrimmed(postDescription, 15)
+                  : "No content to display"}
+              </p>
+            </Link>
           </div>
           <hr className="text-teal-300 pt-2"></hr>
           <div className="flex flex-row justify-between">
