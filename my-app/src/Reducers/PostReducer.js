@@ -8,7 +8,10 @@ export function PostReducer(state, action) {
       return { ...state, posts: action.payload };
     case "DELETE_POST":
       return { ...state, posts: action.payload };
-
+    case "LIKE_POST":
+      return { ...state, posts: action.payload };
+    case "DISLIKE_POST":
+      return { ...state, posts: action.payload };
     default:
       return state;
   }

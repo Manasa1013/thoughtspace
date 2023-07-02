@@ -11,6 +11,17 @@ export function PostDetails() {
   const { postId } = useParams();
   const navigate = useNavigate();
   console.log({ postId });
+  let likedUser = "";
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    fetchSinglePost(postId)
+      .then((res) => {
+        setPost(() => res);
+      })
+      .catch((err) => console.error("err at fetching single post", err));
+  }, [post]);
+
   const {
     fetchSinglePost,
     openOptionsModal,
@@ -18,18 +29,16 @@ export function PostDetails() {
     setShowEditModal,
     showEditModal,
     deletePostHandler,
+    likePostHandler,
+    disLikePostHandler,
+    isLiked,
+    setIsLiked,
+    isLikedByUser,
   } = usePost();
-  const [post, setPost] = useState({});
   const location = useLocation();
   const {
     auth: { user },
   } = useAuth();
-  useEffect(() => {
-    fetchSinglePost(postId)
-      .then((res) => setPost(() => res))
-      .catch((err) => console.error("err at fetching single post", err));
-  }, [post]);
-
   return (
     <section className="p-4" key={postId}>
       <div className="flex flex-row bg-white gap-2 my-4">
@@ -168,14 +177,37 @@ export function PostDetails() {
             <hr className="text-teal-300 pt-2"></hr>
             <div>
               <div className="flex flex-row justify-between p-1">
-                <div
+                <div className="">
+                  <span className="text-teal-600">
+                    {post?.likes?.likeCount}
+                  </span>
+                  <button
+                    className="icon--button bg-white"
+                    onClick={() => {
+                      isLiked
+                        ? disLikePostHandler(post)
+                        : likePostHandler(post);
+                      setIsLiked((prev) => !prev);
+                    }}
+                  >
+                    <i
+                      className={
+                        isLikedByUser(post?.likes) && isLiked
+                          ? "fi fi-ss-heart text-red-600 "
+                          : "fi fi-rs-heart text-teal-600"
+                      }
+                    ></i>
+                  </button>
+                </div>
+                <button
+                  type="button"
                   className="bg-white"
                   onClick={() => {
                     console.log(location, `/posts/${post._id}`);
                   }}
                 >
                   <i className="fi fi-rs-share text-teal-600"></i>
-                </div>
+                </button>
                 <button className="icon--button bg-white" onClick={() => {}}>
                   <i className={"fi fi-rs-bookmark text-teal-600"}></i>
                 </button>

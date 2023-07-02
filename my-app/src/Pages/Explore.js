@@ -25,7 +25,7 @@ export function Explore() {
           <PostList posts={state?.posts} />
         </main>
         <aside className="bg-white">
-          <RightSideNav />
+          <RightSideNav posts={state?.posts} />
         </aside>
       </div>
     </>

@@ -147,6 +147,72 @@ export function PostProvider({ children }) {
       setIsLoading(() => false);
     }
   }
+
+  async function likePostHandler(post) {
+    try {
+      setIsLoading(() => true);
+      const response = await fetch(`/api/posts/like/${post._id}`, {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ postData: post }),
+      });
+      console.log({ response });
+      const { posts } = await response.json();
+
+      if (response.status === 201) {
+        console.log({ posts });
+        dispatch({ type: "LIKE_POST", payload: posts });
+        showToastBar("Post is Liked");
+      } else if (response.status === 500) {
+        console.log({ posts });
+        showToastBar("Error at server , Please try again");
+      } else if (response.status === 404) {
+        console.log({ posts });
+        showToastBar("Login to like the post");
+      } else if (response.status === 400) {
+        console.log({ posts });
+        showToastBar("Already liked the post");
+      }
+    } catch (err) {
+      console.error(err, "at likePostHandler at PostContext");
+      showToastBar("Error! Try again");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
+  async function disLikePostHandler(post) {
+    try {
+      setIsLoading(() => true);
+      const response = await fetch(`/api/posts/dislike/${post._id}`, {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ postData: post }),
+      });
+      console.log({ response });
+      const { posts } = await response.json();
+
+      if (response.status === 201) {
+        console.log({ posts });
+        dispatch({ type: "DISLIKE_POST", payload: posts });
+        showToastBar("Post is unliked");
+      } else if (response.status === 500) {
+        console.log({ posts });
+        showToastBar("Error at server , Please try again");
+      } else if (response.status === 404) {
+        console.log({ posts });
+        showToastBar("Login to unlike");
+      } else if (response.status === 400) {
+        console.log({ posts });
+        showToastBar("Already unliked the post");
+      }
+    } catch (err) {
+      console.error(err, "at dislikePostHandler at PostContext");
+      showToastBar("Error! Try again");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
+  const { auth } = useAuth();
   const [state, dispatch] = useReducer(PostReducer, {
     posts: [],
   });
@@ -158,6 +224,13 @@ export function PostProvider({ children }) {
     visible: false,
     post: {},
   });
+  const [isLiked, setIsLiked] = useState(false);
+  function isLikedByUser(likes) {
+    return likes?.likedBy
+      .map((likedUser) => likedUser.username)
+      .includes(auth?.user?.username);
+  }
+
   return (
     <PostContext.Provider
       value={{
@@ -171,8 +244,13 @@ export function PostProvider({ children }) {
         createPostHandler,
         editPostHandler,
         deletePostHandler,
+        likePostHandler,
+        disLikePostHandler,
         showEditModal,
         setShowEditModal,
+        isLiked,
+        setIsLiked,
+        isLikedByUser,
       }}
     >
       {children}

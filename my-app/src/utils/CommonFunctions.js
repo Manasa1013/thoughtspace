@@ -12,7 +12,7 @@ export function getDateText(createdAt) {
   else if (differenceForHours > 0)
     return differenceForHours > 1 ? "few hours ago" : "1 hour ago";
   else if (differenceForMinutes > 0)
-    return differenceForMinutes > 1 ? "few minutes ago" : "1 minute agp";
+    return differenceForMinutes > 1 ? "few minutes ago" : "1 minute ago";
   else if (differenceForSeconds > 0)
     return differenceForSeconds > 1 ? "few seconds ago" : "1 second ago";
   else return "Just now";

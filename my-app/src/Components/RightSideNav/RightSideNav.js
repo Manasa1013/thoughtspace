@@ -1,10 +1,11 @@
 import { usePost } from "../../Contexts/PostContext";
 import "./RightSideNav.css";
-export function RightSideNav() {
-  const { state, dispatch } = usePost();
+export function RightSideNav({ posts }) {
+  const { dispatch } = usePost();
+
   function getLatestPosts(posts) {
     return posts.sort((a, b) =>
-      Date.parse(a.createdAt) < Date.parse(b.createdAt) ? 1 : -1
+      Date.parse(a.updatedAt) < Date.parse(b.updatedAt) ? 1 : -1
     );
   }
   function getMostLikedPosts(posts) {
@@ -23,12 +24,12 @@ export function RightSideNav() {
           if (e.target.value === "Latest")
             dispatch({
               type: "SET_POSTS",
-              payload: getLatestPosts(state?.posts),
+              payload: getLatestPosts(posts),
             });
           else if (e.target.value === "Trending") {
             dispatch({
               type: "SET_POSTS",
-              payload: getMostLikedPosts(state?.posts),
+              payload: getMostLikedPosts(posts),
             });
           }
         }}

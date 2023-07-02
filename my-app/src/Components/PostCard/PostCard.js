@@ -18,14 +18,19 @@ export function PostCard({ post: postData }) {
   const {
     auth: { user },
   } = useAuth();
-  const postToBePassed = postData;
   const {
     openOptionsModal,
     setOpenOptionsModal,
     deletePostHandler,
+    likePostHandler,
+    disLikePostHandler,
     setShowEditModal,
     showEditModal,
+    isLiked,
+    setIsLiked,
+    isLikedByUser,
   } = usePost();
+
   return (
     <div className="flex flex-row bg-white gap-2 my-4 ">
       <div className="flex flex-row p-1 m-1 pr-0 aspect-square">
@@ -163,15 +168,23 @@ export function PostCard({ post: postData }) {
           <hr className="text-teal-300 pt-2"></hr>
           <div className="flex flex-row justify-between">
             <div className="">
-              <span className="text-teal-600">{likes.likeCount}</span>
+              <span className="text-teal-600">{likes?.likeCount}</span>
               <button
                 className="icon--button bg-white"
                 onClick={() => {
-                  //   toggleIsBookMarked(postId);
-                  //   console.log(post, isBookmarked);
+                  isLiked
+                    ? disLikePostHandler(postData)
+                    : likePostHandler(postData);
+                  setIsLiked((prev) => !prev);
                 }}
               >
-                <i className={"fi fi-rs-heart text-teal-600"}></i>
+                <i
+                  className={
+                    isLikedByUser(likes) && isLiked
+                      ? "fi fi-ss-heart text-red-600 "
+                      : "fi fi-rs-heart text-teal-600"
+                  }
+                ></i>
               </button>
             </div>
             <button type="button" className="icon--button">

@@ -73,17 +73,17 @@ function App() {
         <Route
           path="/bookmarks"
           element={
-            <>
+            <RequireAuth>
               <Home />
-            </>
+            </RequireAuth>
           }
         ></Route>
         <Route
           path="/profile"
           element={
-            <>
-              <Home />
-            </>
+            <RequireAuth>
+              <UserProfile />
+            </RequireAuth>
           }
         ></Route>
         <Route
