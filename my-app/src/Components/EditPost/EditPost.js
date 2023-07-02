@@ -3,7 +3,7 @@ import { useToast } from "../../Contexts/ToastContext";
 import { usePost } from "../../Contexts/PostContext";
 import { useParams } from "react-router";
 
-export function EditPost({ setShowEditModal, showEditModal, post: postData }) {
+export function EditPost({ setShowEditModal, showEditModal }) {
   console.log({ showEditModal }, "at edipost");
 
   const [post, setPost] = useState(showEditModal?.post);

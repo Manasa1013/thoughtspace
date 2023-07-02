@@ -138,6 +138,10 @@ export function PostProvider({ children }) {
     post: {},
     visible: false,
   });
+  const [showEditModal, setShowEditModal] = useState({
+    visible: false,
+    post: {},
+  });
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -153,6 +157,8 @@ export function PostProvider({ children }) {
         createPostHandler,
         editPostHandler,
         deletePostHandler,
+        showEditModal,
+        setShowEditModal,
       }}
     >
       {children}

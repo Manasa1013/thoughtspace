@@ -6,7 +6,7 @@ import { getDateText, getTrimmed } from "../../utils/CommonFunctions";
 import "./PostCard.css";
 import { usePost } from "../../Contexts/PostContext";
 import { EditPost } from "../EditPost/EditPost";
-export function PostCard({ post: postData, setShowEditModal, showEditModal }) {
+export function PostCard({ post: postData }) {
   const {
     _id: postId,
     likes,
@@ -19,8 +19,13 @@ export function PostCard({ post: postData, setShowEditModal, showEditModal }) {
     auth: { user },
   } = useAuth();
   const postToBePassed = postData;
-  const { openOptionsModal, setOpenOptionsModal, deletePostHandler } =
-    usePost();
+  const {
+    openOptionsModal,
+    setOpenOptionsModal,
+    deletePostHandler,
+    setShowEditModal,
+    showEditModal,
+  } = usePost();
   return (
     <div className="flex flex-row bg-white gap-2 my-4 ">
       <div className="flex flex-row pl-2 my-2">

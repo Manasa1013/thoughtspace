@@ -1,14 +1,24 @@
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "../../Contexts/AuthContext";
 import { usePost } from "../../Contexts/PostContext";
+import { EditPost } from "../EditPost/EditPost";
+import { CommentCard } from "../CommentCard/CommentCard";
 import { getDateText, getTrimmed } from "../../utils/CommonFunctions";
 import "./PostDetails.css";
 export function PostDetails() {
   const { postId } = useParams();
+  const navigate = useNavigate();
   console.log({ postId });
-  const { fetchSinglePost, openOptionsModal, setOpenOptionsModal } = usePost();
+  const {
+    fetchSinglePost,
+    openOptionsModal,
+    setOpenOptionsModal,
+    setShowEditModal,
+    showEditModal,
+    deletePostHandler,
+  } = usePost();
   const [post, setPost] = useState({});
   const location = useLocation();
   const {
@@ -18,7 +28,7 @@ export function PostDetails() {
     fetchSinglePost(postId)
       .then((res) => setPost(() => res))
       .catch((err) => console.error("err at fetching single post", err));
-  }, [postId]);
+  }, [post]);
 
   return (
     <main className="main" key={postId}>
@@ -51,11 +61,16 @@ export function PostDetails() {
                   <button
                     className="px-2 icon--button text-teal-700"
                     onClick={() => {
-                      console.log("modal open", postId);
-                      setOpenOptionsModal((prev) => !prev);
+                      console.log("modal open", post._id);
+                      setOpenOptionsModal((prev) => ({
+                        ...prev,
+                        visible: !prev.visible,
+                        post: post,
+                      }));
                     }}
                   >
-                    {openOptionsModal ? (
+                    {openOptionsModal.visible &&
+                    openOptionsModal.post._id === post._id ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -89,25 +104,49 @@ export function PostDetails() {
                   </button>
                   <div
                     className={
-                      openOptionsModal
+                      openOptionsModal.visible &&
+                      openOptionsModal.post._id === post._id
                         ? `flex flex-col gap-1 absolute top-7 border-teal-50 border-2 bg-white right-2`
                         : `flex flex-col gap-1 absolute top-7 border-teal-50 border-2 bg-white right-2 invisible`
                     }
                   >
+                    {showEditModal.visible && (
+                      <EditPost
+                        showEditModal={showEditModal}
+                        setShowEditModal={setShowEditModal}
+                      />
+                    )}
                     <button
                       type="button"
                       className="button-primary p-3 border-teal-50"
-                      onClick={() => {
-                        setOpenOptionsModal(() => false);
+                      onClick={(e) => {
+                        setShowEditModal(() => {
+                          console.log(
+                            e.target.parentElement.parentElement.parentElement
+                              .parentElement,
+                            "at showEditModal ,line 95,POstCard",
+                            post._id
+                          );
+                          return {
+                            post: post,
+                            visible: true,
+                          };
+                        });
                       }}
                     >
                       Edit
                     </button>
+
                     <button
                       type="button"
                       className="button-primary p-3 border-teal-50"
                       onClick={() => {
-                        setOpenOptionsModal(() => false);
+                        deletePostHandler(post);
+                        navigate("/posts");
+                        setOpenOptionsModal((prev) => ({
+                          ...prev,
+                          visible: false,
+                        }));
                       }}
                     >
                       Delete
@@ -123,9 +162,7 @@ export function PostDetails() {
                 <Link to="/users">{`@${post.username}`}</Link>
               </div>
               <p className="leading-2">
-                {post.content
-                  ? getTrimmed(post.content, 15)
-                  : "No content to display"}
+                {post?.content ? post.content : "No content to display"}
               </p>
             </div>
             <hr className="text-teal-300 pt-2"></hr>
@@ -158,37 +195,5 @@ export function PostDetails() {
         </div>
       </div>
     </main>
-  );
-}
-
-export function CommentCard({ comment, postUserName }) {
-  return (
-    <>
-      <div className="flex flex-row">
-        <div className="flex flex-row pl-2 my-2">
-          <img
-            src="http://bit.ly/42Zm7tM"
-            className="rounded-full bg-teal-400 w-10 h-10"
-            alt={comment.username}
-          />
-        </div>
-        <div className="flex p-4 flex-col">
-          <div className="p-1 text-gray-900">{comment.username}</div>
-          <div className="p-1">Replying to {postUserName}</div>
-          <div className="p-1">{comment.comment}</div>
-          <div className="flex flex-row justify-between p-1">
-            <button className="icon--button bg-white">
-              <i className="fi fi-rs-heart text-teal-600"></i>
-            </button>
-            <button className="icon--button bg-white">
-              <i className="fi fi-rs-comment text-teal-600"></i>
-            </button>
-            <button className="icon--button bg-white">
-              <i className="fi fi-rs-share text-teal-600"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
   );
 }
