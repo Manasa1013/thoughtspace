@@ -10,7 +10,7 @@ import { useAuth } from "../Contexts/AuthContext";
 import { usePost } from "../Contexts/PostContext";
 
 export function Home() {
-  const { fetchUserPosts, state } = usePost();
+  const { fetchUserPosts, state, isLiked } = usePost();
 
   const {
     auth: { user },
@@ -24,7 +24,7 @@ export function Home() {
       .catch((err) => {
         console.error(err, "error at fetchin user posts");
       });
-  }, []);
+  }, [isLiked]);
   return (
     <>
       <div className="grid-container">

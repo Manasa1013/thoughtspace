@@ -6,6 +6,7 @@ import { getDateText, getTrimmed } from "../../utils/CommonFunctions";
 import "./PostCard.css";
 import { usePost } from "../../Contexts/PostContext";
 import { EditPost } from "../EditPost/EditPost";
+import { useUser } from "../../Contexts/UserContext";
 export function PostCard({ post: postData }) {
   const {
     _id: postId,
@@ -30,7 +31,7 @@ export function PostCard({ post: postData }) {
     setIsLiked,
     isLikedByUser,
   } = usePost();
-
+  const { bookmarkPostHandler } = useUser();
   return (
     <div className="flex flex-row bg-white gap-2 my-4 ">
       <div className="flex flex-row p-1 m-1 pr-0 aspect-square">
@@ -196,8 +197,8 @@ export function PostCard({ post: postData }) {
             <button
               className="icon--button bg-white"
               onClick={() => {
-                //   toggleIsBookMarked(postId);
-                //   console.log(post, isBookmarked);
+                console.log({ user });
+                bookmarkPostHandler(postData, user.username);
               }}
             >
               <i className={"fi fi-rs-bookmark text-teal-600"}></i>

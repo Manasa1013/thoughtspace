@@ -9,6 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Contexts/AuthContext";
 import { ToastProvider } from "./Contexts/ToastContext";
 import { PostProvider } from "./Contexts/PostContext";
+import { UserProvider } from "./Contexts/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,9 +17,11 @@ root.render(
     <Router>
       <ToastProvider>
         <AuthProvider>
-          <PostProvider>
-            <App />
-          </PostProvider>
+          <UserProvider>
+            <PostProvider>
+              <App />
+            </PostProvider>
+          </UserProvider>
         </AuthProvider>
       </ToastProvider>
     </Router>
