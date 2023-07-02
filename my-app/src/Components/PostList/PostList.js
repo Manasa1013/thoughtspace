@@ -2,21 +2,17 @@ import { PostCard } from "../PostCard/PostCard";
 import "./PostList.css";
 import { usePost } from "../../Contexts/PostContext";
 import { useState } from "react";
-import { EditPost } from "../EditPost/EditPost";
-export function PostList() {
-  const { state } = usePost();
-
-  console.log({ state });
+export function PostList({ posts }) {
   return (
-    <main className="p-3">
+    <div className="p-3">
       <h2 className="p-2">Latest Posts</h2>
       <ul className="list-none">
-        {state?.posts?.map((post) => (
+        {posts?.map((post) => (
           <li key={post._id}>
             <PostCard post={post} />
           </li>
         ))}
       </ul>
-    </main>
+    </div>
   );
 }

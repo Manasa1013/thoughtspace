@@ -28,14 +28,14 @@ export function PostCard({ post: postData }) {
   } = usePost();
   return (
     <div className="flex flex-row bg-white gap-2 my-4 ">
-      <div className="flex flex-row pl-2 my-2">
+      <div className="flex flex-row p-1 m-1 pr-0 aspect-square">
         <img
           src="http://bit.ly/42Zm7tM"
           className="rounded-full bg-teal-400 w-10 h-10"
-          alt="User-Picture"
+          alt={user ? user?.username : "UserProfile"}
         />
       </div>
-      <div className="flex flex-row bg-white gap-2 my-2">
+      <div className="flex flex-row bg-white gap-1 my-2 w-3/4">
         <div className="flex flex-col  gap-1 p-4">
           <div className="flex flex-row gap-1 justify-between relative">
             <div className="flex flex-row gap-1">
@@ -148,7 +148,7 @@ export function PostCard({ post: postData }) {
               ""
             )}
           </div>
-          <div className="break-all">
+          <div className="break-word">
             <div className="text-teal-800 text-sm text-left">
               <Link to="/users">{`@${username}`}</Link>
             </div>

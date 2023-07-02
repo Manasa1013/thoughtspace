@@ -15,12 +15,12 @@ export function NewPost() {
   });
   return (
     <>
-      <div className="bg-white mr-16 p-2 mt-2">
-        <div className="flex flex-row flex-nowrap p-2">
-          <div className="flex flex-row p-2 mr-2 aspect-square">
+      <div className="bg-white m-4 mt-2 p-2 ">
+        <div className="flex flex-row flex-nowrap">
+          <div className="flex flex-row p-1 m-1 pr-0 aspect-square">
             <img
               src="http://bit.ly/42Zm7tM"
-              className="rounded-full bg-teal-400 w-12 h-12"
+              className="rounded-full bg-teal-400 w-10 h-10"
               alt={auth?.user ? auth?.user?.username : "UserProfile-Photo"}
             />
           </div>
@@ -29,7 +29,7 @@ export function NewPost() {
               name=""
               id=""
               cols="50"
-              rows="6"
+              rows="4"
               className="w-full bg-teal-100/50 p-4 focus:outline-teal-100 text-lg border-none resize-none"
               placeholder="Write something interesting..."
               spellCheck="false"

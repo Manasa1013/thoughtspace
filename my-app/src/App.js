@@ -11,7 +11,7 @@ import {
   PostDetails,
   Loader,
 } from "./Components";
-import { Home } from "./Pages";
+import { Explore, Home, SinglePostPage } from "./Pages";
 import "./App.css";
 import { useToast } from "./Contexts/ToastContext";
 import { Toast } from "./Components/Toast/Toast";
@@ -44,15 +44,7 @@ function App() {
           path="/signup"
           element={auth.token ? <Home /> : <Signup />}
         ></Route>
-        <Route
-          path="/posts"
-          element={
-            <>
-              <NewPost />
-              <PostList />
-            </>
-          }
-        ></Route>
+
         <Route
           path="/users"
           element={
@@ -61,7 +53,7 @@ function App() {
             </RequireAuth>
           }
         ></Route>
-        <Route path="/posts/:postId" element={<PostDetails />}></Route>
+        <Route path="/posts/:postId" element={<SinglePostPage />}></Route>
         <Route
           path="/"
           element={
@@ -74,7 +66,7 @@ function App() {
           path="/explore"
           element={
             <>
-              <Home />
+              <Explore />
             </>
           }
         ></Route>

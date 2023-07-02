@@ -37,6 +37,22 @@ export function PostProvider({ children }) {
       setIsLoading(() => true);
     }
   }
+  async function fetchUserPosts(username) {
+    try {
+      setIsLoading(() => true);
+      const response = await fetch(`/api/posts/user/${username}`);
+      const { posts } = await response.json();
+      if (response.status === 200) {
+        console.log({ posts });
+        dispatch({ type: "SET_POSTS", payload: posts });
+      }
+    } catch (err) {
+      console.error("error at fetching posts");
+      showToastBar("Error at fetching Posts");
+    } finally {
+      setIsLoading(() => true);
+    }
+  }
 
   async function fetchSinglePost(postId) {
     try {
@@ -142,9 +158,6 @@ export function PostProvider({ children }) {
     visible: false,
     post: {},
   });
-  useEffect(() => {
-    fetchPosts();
-  }, []);
   return (
     <PostContext.Provider
       value={{
@@ -153,6 +166,7 @@ export function PostProvider({ children }) {
         openOptionsModal,
         setOpenOptionsModal,
         fetchPosts,
+        fetchUserPosts,
         fetchSinglePost,
         createPostHandler,
         editPostHandler,
