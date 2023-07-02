@@ -125,6 +125,7 @@ export const editPostHandler = function (schema, request) {
       );
     }
     const postId = request.params.postId;
+    console.log({ postId }, "from Backend PostOCntol");
     const { postData } = JSON.parse(request.requestBody);
     let post = schema.posts.findBy({ _id: postId }).attrs;
     if (post.username !== user.username) {
@@ -271,10 +272,12 @@ export const dislikePostHandler = function (schema, request) {
 
 /**
  * This handler handles deleting a post in the db.
- * send DELETE Request at /api/user/posts/:postId
+ * send DELETE Request at /api/posts/:postId
  * */
 export const deletePostHandler = function (schema, request) {
+  const requestB = request;
   const user = requiresAuth.call(this, request);
+  console.log({ requestB });
   try {
     if (!user) {
       return new Response(
@@ -288,6 +291,7 @@ export const deletePostHandler = function (schema, request) {
       );
     }
     const postId = request.params.postId;
+    console.log({ postId }, "at delete seerver");
     let post = schema.posts.findBy({ _id: postId }).attrs;
     if (post.username !== user.username) {
       return new Response(

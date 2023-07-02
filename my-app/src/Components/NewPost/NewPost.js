@@ -17,16 +17,12 @@ export function NewPost() {
     <>
       <div className="bg-white mr-16 p-2 mt-2">
         <div className="flex flex-row flex-nowrap p-2">
-          <div
-            className={`bg-teal-600
-          rounded-full w-10 h-10
-          p-2 mr-2 aspect-square
-          `}
-          >
-            {/* <img
-              className="rounded-full bg-gray-500 w-10 h-10 mr-2"
-              src="https://pbs.twimg.com/profile_images/1631883791928299521/KGWtSScG_400x400.jpg"
-            /> */}
+          <div className="flex flex-row p-2 mr-2 aspect-square">
+            <img
+              src="http://bit.ly/42Zm7tM"
+              className="rounded-full bg-teal-400 w-12 h-12"
+              alt={auth?.user ? auth?.user?.username : "UserProfile-Photo"}
+            />
           </div>
           <div className="w-full">
             <textarea

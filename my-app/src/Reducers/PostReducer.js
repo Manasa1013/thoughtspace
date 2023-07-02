@@ -6,6 +6,8 @@ export function PostReducer(state, action) {
       return { ...state, posts: action.payload };
     case "EDIT_POST":
       return { ...state, posts: action.payload };
+    case "DELETE_POST":
+      return { ...state, posts: action.payload };
 
     default:
       return state;

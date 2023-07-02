@@ -79,7 +79,7 @@ export function PostProvider({ children }) {
     try {
       setIsLoading(() => true);
       console.log({ post });
-      const response = await fetch("/api/posts/edit/:postId", {
+      const response = await fetch(`/api/posts/edit/${post._id}`, {
         method: "POST",
         headers: { authorization: token },
         body: JSON.stringify({ postData: post }),
@@ -89,6 +89,9 @@ export function PostProvider({ children }) {
       if (response.status === 201) {
         console.log({ posts });
         dispatch({ type: "EDIT_POST", payload: posts });
+      } else if (response.status === 500) {
+        console.log({ posts });
+        showToastBar("Error at server , Please try again");
       }
     } catch (err) {
       console.error(err, "error at editing posts");
@@ -96,8 +99,44 @@ export function PostProvider({ children }) {
       setIsLoading(() => false);
     }
   }
+  async function deletePostHandler(post) {
+    try {
+      setIsLoading(() => true);
+      console.log({ post });
+      const response = await fetch(`/api/posts/${post._id}`, {
+        method: "DELETE",
+        headers: { authorization: token },
+        body: JSON.stringify({ postData: post }),
+      });
+      console.log({ response });
+      const { posts } = await response.json();
+      if (response.status === 201) {
+        console.log({ posts });
+        dispatch({ type: "DELETE_POST", payload: posts });
+        showToastBar("Deleted Post");
+      } else if (response.status === 500) {
+        console.log({ posts });
+        showToastBar("Error at server , Please try again");
+      } else if (response.status === 404) {
+        console.log({ posts });
+        showToastBar("Login to delete the post");
+      } else if (response.status === 400) {
+        console.log({ posts });
+        showToastBar("Cannot delete other user posts");
+      }
+    } catch (err) {
+      console.error(err, "error at editing posts");
+      showToastBar("Error at deleting the post");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
   const [state, dispatch] = useReducer(PostReducer, {
     posts: [],
+  });
+  const [openOptionsModal, setOpenOptionsModal] = useState({
+    post: {},
+    visible: false,
   });
   useEffect(() => {
     fetchPosts();
@@ -107,10 +146,13 @@ export function PostProvider({ children }) {
       value={{
         state,
         dispatch,
+        openOptionsModal,
+        setOpenOptionsModal,
         fetchPosts,
         fetchSinglePost,
         createPostHandler,
         editPostHandler,
+        deletePostHandler,
       }}
     >
       {children}

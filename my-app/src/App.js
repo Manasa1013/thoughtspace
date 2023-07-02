@@ -15,6 +15,7 @@ import "./App.css";
 import { useToast } from "./Contexts/ToastContext";
 import { Toast } from "./Components/Toast/Toast";
 import { useAuth } from "./Contexts/AuthContext";
+import { EditPost } from "./Components/EditPost/EditPost";
 
 function App() {
   const { toast, hideToastBar } = useToast();
@@ -58,7 +59,14 @@ function App() {
           }
         ></Route>
         <Route path="/posts/:postId" element={<PostDetails />}></Route>
-        <Route path="*" element={<Home />}></Route>
+        <Route
+          path="*"
+          element={
+            <>
+              <Home />
+            </>
+          }
+        ></Route>
       </Routes>
       <Toast />
     </div>
