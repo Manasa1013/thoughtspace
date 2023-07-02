@@ -22,3 +22,11 @@ export function getTrimmed(sentence, n) {
   let sentenceArr = sentence.split(" ");
   return sentenceArr.slice(0, n + 1).join(" ");
 }
+
+export function getActiveClassName(isActive, isPending) {
+  return isPending
+    ? "pending"
+    : isActive
+    ? "font-bold text-teal-700"
+    : "text-gray-700";
+}

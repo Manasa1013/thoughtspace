@@ -9,6 +9,7 @@ import {
   PostList,
   UserProfile,
   PostDetails,
+  Loader,
 } from "./Components";
 import { Home } from "./Pages";
 import "./App.css";
@@ -16,9 +17,11 @@ import { useToast } from "./Contexts/ToastContext";
 import { Toast } from "./Components/Toast/Toast";
 import { useAuth } from "./Contexts/AuthContext";
 import { EditPost } from "./Components/EditPost/EditPost";
+import { usePost } from "./Contexts/PostContext";
 
 function App() {
   const { toast, hideToastBar } = useToast();
+  const { isLoading } = usePost();
   const { auth } = useAuth();
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -60,6 +63,38 @@ function App() {
         ></Route>
         <Route path="/posts/:postId" element={<PostDetails />}></Route>
         <Route
+          path="/"
+          element={
+            <>
+              <Home />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/explore"
+          element={
+            <>
+              <Home />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/bookmarks"
+          element={
+            <>
+              <Home />
+            </>
+          }
+        ></Route>
+        <Route
+          path="/profile"
+          element={
+            <>
+              <Home />
+            </>
+          }
+        ></Route>
+        <Route
           path="*"
           element={
             <>
@@ -69,6 +104,7 @@ function App() {
         ></Route>
       </Routes>
       <Toast />
+      {isLoading && <Loader />}
     </div>
   );
 }

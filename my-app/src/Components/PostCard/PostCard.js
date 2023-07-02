@@ -162,15 +162,18 @@ export function PostCard({ post: postData }) {
           </div>
           <hr className="text-teal-300 pt-2"></hr>
           <div className="flex flex-row justify-between">
-            <button
-              className="icon--button bg-white"
-              onClick={() => {
-                //   toggleIsBookMarked(postId);
-                //   console.log(post, isBookmarked);
-              }}
-            >
-              <i className={"fi fi-rs-heart text-teal-600"}></i>
-            </button>
+            <div className="">
+              <span className="text-teal-600">{likes.likeCount}</span>
+              <button
+                className="icon--button bg-white"
+                onClick={() => {
+                  //   toggleIsBookMarked(postId);
+                  //   console.log(post, isBookmarked);
+                }}
+              >
+                <i className={"fi fi-rs-heart text-teal-600"}></i>
+              </button>
+            </div>
             <button type="button" className="icon--button">
               <i className="fi fi-rs-comment text-teal-600"></i>
             </button>

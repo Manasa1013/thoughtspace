@@ -1,0 +1,7 @@
+.aside-left {
+    grid-area: aside-left;
+}
+
+.links-container>a {
+    padding: 0.5rem 0.2rem;
+}

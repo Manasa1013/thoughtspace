@@ -39,6 +39,25 @@ body {
   font-weight: 400;
   color: var(--primary-white);
 }
+/* grid style */
+.grid-rows {
+  display: grid;
+}
+.grid-container {
+  display: grid;
+  height: max-content;
+  grid-template-columns: 0.8fr 2.5fr 0.7fr;
+  grid-template-areas:
+    "nav nav nav"
+    "aside-left main aside-right"
+    "aside-left main aside-right"
+    "aside-left main aside-right";
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
 
 .flex-center-align {
   display: flex;
@@ -56,6 +75,7 @@ body {
 .app-body {
   margin: 0rem 2rem 0rem 2rem;
 }
+
 
 .post-container {
   display: flex;
