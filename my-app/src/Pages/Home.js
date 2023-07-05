@@ -8,7 +8,6 @@ import {
 } from "../Components";
 import { useAuth } from "../Contexts/AuthContext";
 import { usePost } from "../Contexts/PostContext";
-import { useUser } from "../Contexts/UserContext";
 
 export function Home() {
   const { fetchUserPosts, state, isLiked } = usePost();
@@ -16,16 +15,15 @@ export function Home() {
   const {
     auth: { user },
   } = useAuth();
-  const { isBookmarked } = useUser();
   useEffect(() => {
     fetchUserPosts(user?.username)
       .then((res) => {
         console.log({ res }, "at home");
       })
       .catch((err) => {
-        console.error(err, "error at fetchin user posts");
+        console.error(err, "error at fetching user posts");
       });
-  }, [isLiked, isBookmarked]);
+  }, [isLiked]);
   return (
     <>
       <div className="grid-container">

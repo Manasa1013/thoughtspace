@@ -9,7 +9,7 @@ export function Explore() {
   useEffect(() => {
     console.log(fetchPosts());
     //eslint-disable-next-line
-  }, [isBookmarked]);
+  }, []);
   return (
     <>
       <div className="grid-container">

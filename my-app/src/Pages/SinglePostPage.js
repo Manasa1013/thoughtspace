@@ -9,6 +9,7 @@ import {
   Loader,
 } from "../Components";
 import { usePost } from "../Contexts/PostContext";
+import { useUser } from "../Contexts/UserContext";
 
 export function SinglePostPage() {
   const { postId } = useParams();
@@ -25,6 +26,13 @@ export function SinglePostPage() {
       })
       .catch((err) => console.error("err at fetching single post", err));
   }, [isLiked]);
+
+  const { setUserBookmarks, fetchUserBookmarks, isBookmarked } = useUser();
+  useEffect(() => {
+    fetchUserBookmarks()
+      .then((res) => setUserBookmarks(() => res))
+      .catch((err) => console.error(err));
+  }, [isBookmarked]);
   return (
     <>
       <div className="grid-container">

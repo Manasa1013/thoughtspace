@@ -6,7 +6,6 @@ import "./PostCard.css";
 import { usePost } from "../../Contexts/PostContext";
 import { EditPost } from "../EditPost/EditPost";
 import { useUser } from "../../Contexts/UserContext";
-import { useEffect } from "react";
 import { Loader } from "../Loader/Loader";
 export function PostCard({ post: postData }) {
   const {
@@ -40,8 +39,6 @@ export function PostCard({ post: postData }) {
     state: userState,
     userBookmarks,
   } = useUser();
-  const userDetails = () =>
-    userState?.users?.find((userItem) => userItem.username === user.username);
 
   return !isUserLoading ? (
     <div className="flex flex-row bg-white gap-2 my-4 ">
@@ -208,26 +205,6 @@ export function PostCard({ post: postData }) {
             <button
               className="icon--button bg-white"
               onClick={() => {
-                // isBookmarked.postId === postId && isBookmarkedByUser(postId)
-                //   ? removeBookmarkHandler(postData, user.username)
-                //   : bookmarkPostHandler(postData, user.username);
-                // if (isBookmarked.postId === postId) {
-                //   setIsBookmarked((prev) => ({
-                //     ...prev,
-                //     bool: !prev.bool,
-                //     postId: postId,
-                //   }));
-                // }
-                // isBookmarkedByUser(postId)
-                // ? removeBookmarkHandler(postData, user.username)
-                // :
-                // console.log(
-                //   Array.isArray(userDetails())
-                //     ? userDetails()?.bookmarks?.find(
-                //         (post) => post._id === postId
-                //       )
-                //     : "no value"
-                // );
                 console.log(
                   { userBookmarks },
                   userBookmarks
@@ -244,10 +221,6 @@ export function PostCard({ post: postData }) {
             >
               <i
                 className={
-                  // Array.isArray(userDetails())
-                  //   ? userDetails()
-                  //       ?.bookmarks?.map((bookmark) => bookmark._id)
-                  //       ?.includes(postId)
                   userBookmarks
                     ?.map((bookmarkedPost) => bookmarkedPost._id)
                     .includes(postId)

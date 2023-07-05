@@ -6,6 +6,8 @@ import { EditPost } from "../EditPost/EditPost";
 import { CommentCard } from "../CommentCard/CommentCard";
 import { getDateText } from "../../utils/CommonFunctions";
 import "./PostDetails.css";
+import { useUser } from "../../Contexts/UserContext";
+import { useEffect } from "react";
 export function PostDetails({ post, postId }) {
   const navigate = useNavigate();
 
@@ -17,13 +19,18 @@ export function PostDetails({ post, postId }) {
     deletePostHandler,
     likePostHandler,
     disLikePostHandler,
-    isLiked,
     setIsLiked,
     isLikedByUser,
   } = usePost();
   const {
     auth: { user },
   } = useAuth();
+  const {
+    userBookmarks,
+    setIsBookmarked,
+    bookmarkPostHandler,
+    removeBookmarkHandler,
+  } = useUser();
   return (
     <section className="p-4" key={postId}>
       <div className="flex flex-row bg-white gap-2 my-4">
@@ -193,8 +200,32 @@ export function PostDetails({ post, postId }) {
                 >
                   <i className="fi fi-rs-share text-teal-600"></i>
                 </button>
-                <button className="icon--button bg-white" onClick={() => {}}>
-                  <i className={"fi fi-rs-bookmark text-teal-600"}></i>
+                <button
+                  className="icon--button bg-white"
+                  onClick={() => {
+                    console.log(
+                      { userBookmarks },
+                      userBookmarks
+                        ?.map((bookmarkedPost) => bookmarkedPost._id)
+                        .includes(postId)
+                    );
+                    userBookmarks
+                      ?.map((bookmarkedPost) => bookmarkedPost._id)
+                      .includes(postId)
+                      ? removeBookmarkHandler(post, user.username)
+                      : bookmarkPostHandler(post, user.username);
+                    setIsBookmarked((prev) => !prev);
+                  }}
+                >
+                  <i
+                    className={
+                      userBookmarks
+                        ?.map((bookmarkedPost) => bookmarkedPost._id)
+                        .includes(postId)
+                        ? "fi fi-ss-bookmark text-teal-600"
+                        : "fi fi-rs-bookmark text-teal-600"
+                    }
+                  ></i>
                 </button>
               </div>
             </div>

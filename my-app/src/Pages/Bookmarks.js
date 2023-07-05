@@ -20,10 +20,7 @@ export function Bookmarks() {
   } = useAuth();
   const { state: postState } = usePost();
   const { showToastBar } = useToast();
-  const authUserBookmarks = userState?.users?.filter(
-    (userItem) => userItem.username === user.username
-  )[0]?.bookmarks;
-  // const [userBookmarks, setUserBookmarks] = useState(authUserBookmarks ?? []);
+
   const location = useLocation();
 
   useEffect(() => {
