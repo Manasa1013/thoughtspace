@@ -11,23 +11,19 @@ import {
   PostDetails,
   Loader,
 } from "./Components";
-import { Explore, Home, SinglePostPage } from "./Pages";
+import { Bookmarks, Explore, Home, SinglePostPage } from "./Pages";
 import "./App.css";
 import { useToast } from "./Contexts/ToastContext";
 import { Toast } from "./Components/Toast/Toast";
 import { useAuth } from "./Contexts/AuthContext";
-import { EditPost } from "./Components/EditPost/EditPost";
-import { usePost } from "./Contexts/PostContext";
 
 function App() {
   const { toast, hideToastBar } = useToast();
-  const { isLoading } = usePost();
   const { auth } = useAuth();
   useEffect(() => {
     let timer = setTimeout(() => {
       if (toast.isVisible === "show") {
         hideToastBar();
-        // setIsLoading(false);
       }
     }, 3000);
     return () => clearTimeout(timer);
@@ -74,7 +70,7 @@ function App() {
           path="/bookmarks"
           element={
             <RequireAuth>
-              <Home />
+              <Bookmarks />
             </RequireAuth>
           }
         ></Route>
@@ -96,7 +92,6 @@ function App() {
         ></Route>
       </Routes>
       <Toast />
-      {isLoading && <Loader />}
     </div>
   );
 }

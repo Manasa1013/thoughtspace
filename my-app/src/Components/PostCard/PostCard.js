@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../Contexts/AuthContext";
@@ -7,6 +6,8 @@ import "./PostCard.css";
 import { usePost } from "../../Contexts/PostContext";
 import { EditPost } from "../EditPost/EditPost";
 import { useUser } from "../../Contexts/UserContext";
+import { useEffect } from "react";
+import { Loader } from "../Loader/Loader";
 export function PostCard({ post: postData }) {
   const {
     _id: postId,
@@ -31,8 +32,18 @@ export function PostCard({ post: postData }) {
     setIsLiked,
     isLikedByUser,
   } = usePost();
-  const { bookmarkPostHandler } = useUser();
-  return (
+  const {
+    bookmarkPostHandler,
+    removeBookmarkHandler,
+    setIsBookmarked,
+    isLoading: isUserLoading,
+    state: userState,
+    userBookmarks,
+  } = useUser();
+  const userDetails = () =>
+    userState?.users?.find((userItem) => userItem.username === user.username);
+
+  return !isUserLoading ? (
     <div className="flex flex-row bg-white gap-2 my-4 ">
       <div className="flex flex-row p-1 m-1 pr-0 aspect-square">
         <img
@@ -173,7 +184,7 @@ export function PostCard({ post: postData }) {
               <button
                 className="icon--button bg-white"
                 onClick={() => {
-                  isLiked
+                  isLikedByUser(likes)
                     ? disLikePostHandler(postData)
                     : likePostHandler(postData);
                   setIsLiked((prev) => !prev);
@@ -181,7 +192,7 @@ export function PostCard({ post: postData }) {
               >
                 <i
                   className={
-                    isLikedByUser(likes) && isLiked
+                    isLikedByUser(likes)
                       ? "fi fi-ss-heart text-red-600 "
                       : "fi fi-rs-heart text-teal-600"
                   }
@@ -197,15 +208,59 @@ export function PostCard({ post: postData }) {
             <button
               className="icon--button bg-white"
               onClick={() => {
-                console.log({ user });
-                bookmarkPostHandler(postData, user.username);
+                // isBookmarked.postId === postId && isBookmarkedByUser(postId)
+                //   ? removeBookmarkHandler(postData, user.username)
+                //   : bookmarkPostHandler(postData, user.username);
+                // if (isBookmarked.postId === postId) {
+                //   setIsBookmarked((prev) => ({
+                //     ...prev,
+                //     bool: !prev.bool,
+                //     postId: postId,
+                //   }));
+                // }
+                // isBookmarkedByUser(postId)
+                // ? removeBookmarkHandler(postData, user.username)
+                // :
+                // console.log(
+                //   Array.isArray(userDetails())
+                //     ? userDetails()?.bookmarks?.find(
+                //         (post) => post._id === postId
+                //       )
+                //     : "no value"
+                // );
+                console.log(
+                  { userBookmarks },
+                  userBookmarks
+                    ?.map((bookmarkedPost) => bookmarkedPost._id)
+                    .includes(postId)
+                );
+                userBookmarks
+                  ?.map((bookmarkedPost) => bookmarkedPost._id)
+                  .includes(postId)
+                  ? removeBookmarkHandler(postData, user.username)
+                  : bookmarkPostHandler(postData, user.username);
+                setIsBookmarked((prev) => !prev);
               }}
             >
-              <i className={"fi fi-rs-bookmark text-teal-600"}></i>
+              <i
+                className={
+                  // Array.isArray(userDetails())
+                  //   ? userDetails()
+                  //       ?.bookmarks?.map((bookmark) => bookmark._id)
+                  //       ?.includes(postId)
+                  userBookmarks
+                    ?.map((bookmarkedPost) => bookmarkedPost._id)
+                    .includes(postId)
+                    ? "fi fi-ss-bookmark text-teal-600"
+                    : "fi fi-rs-bookmark text-teal-600"
+                }
+              ></i>
             </button>
           </div>
         </div>
       </div>
     </div>
+  ) : (
+    <Loader />
   );
 }

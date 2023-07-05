@@ -1,6 +1,5 @@
-import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
-import { json, useLocation, useNavigate } from "react-router";
+import { createContext, useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 import { useToast } from "./ToastContext";
 export const AuthContext = createContext();

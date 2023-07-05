@@ -1,29 +1,15 @@
-import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../Contexts/AuthContext";
 import { usePost } from "../../Contexts/PostContext";
 import { EditPost } from "../EditPost/EditPost";
 import { CommentCard } from "../CommentCard/CommentCard";
-import { getDateText, getTrimmed } from "../../utils/CommonFunctions";
+import { getDateText } from "../../utils/CommonFunctions";
 import "./PostDetails.css";
-export function PostDetails() {
-  const { postId } = useParams();
+export function PostDetails({ post, postId }) {
   const navigate = useNavigate();
-  console.log({ postId });
-  let likedUser = "";
-  const [post, setPost] = useState({});
-
-  useEffect(() => {
-    fetchSinglePost(postId)
-      .then((res) => {
-        setPost(() => res);
-      })
-      .catch((err) => console.error("err at fetching single post", err));
-  }, [post]);
 
   const {
-    fetchSinglePost,
     openOptionsModal,
     setOpenOptionsModal,
     setShowEditModal,
@@ -35,7 +21,6 @@ export function PostDetails() {
     setIsLiked,
     isLikedByUser,
   } = usePost();
-  const location = useLocation();
   const {
     auth: { user },
   } = useAuth();
@@ -184,7 +169,7 @@ export function PostDetails() {
                   <button
                     className="icon--button bg-white"
                     onClick={() => {
-                      isLiked
+                      isLikedByUser(post?.likes)
                         ? disLikePostHandler(post)
                         : likePostHandler(post);
                       setIsLiked((prev) => !prev);
@@ -192,7 +177,7 @@ export function PostDetails() {
                   >
                     <i
                       className={
-                        isLikedByUser(post?.likes) && isLiked
+                        isLikedByUser(post?.likes)
                           ? "fi fi-ss-heart text-red-600 "
                           : "fi fi-rs-heart text-teal-600"
                       }
@@ -203,7 +188,7 @@ export function PostDetails() {
                   type="button"
                   className="bg-white"
                   onClick={() => {
-                    console.log(location, `/posts/${post._id}`);
+                    // console.log(location, `/posts/${post._id}`);
                   }}
                 >
                   <i className="fi fi-rs-share text-teal-600"></i>

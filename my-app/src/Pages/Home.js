@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Navbar,
   PostList,
@@ -8,6 +8,7 @@ import {
 } from "../Components";
 import { useAuth } from "../Contexts/AuthContext";
 import { usePost } from "../Contexts/PostContext";
+import { useUser } from "../Contexts/UserContext";
 
 export function Home() {
   const { fetchUserPosts, state, isLiked } = usePost();
@@ -15,8 +16,8 @@ export function Home() {
   const {
     auth: { user },
   } = useAuth();
+  const { isBookmarked } = useUser();
   useEffect(() => {
-    console.log(fetchUserPosts(user?.username));
     fetchUserPosts(user?.username)
       .then((res) => {
         console.log({ res }, "at home");
@@ -24,7 +25,7 @@ export function Home() {
       .catch((err) => {
         console.error(err, "error at fetchin user posts");
       });
-  }, [isLiked]);
+  }, [isLiked, isBookmarked]);
   return (
     <>
       <div className="grid-container">

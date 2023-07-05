@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
-import {
-  Navbar,
-  PostList,
-  RightSideNav,
-  LeftSideNav,
-  NewPost,
-} from "../Components";
+import { useEffect } from "react";
+import { Navbar, PostList, RightSideNav, LeftSideNav } from "../Components";
 import { usePost } from "../Contexts/PostContext";
+import { useUser } from "../Contexts/UserContext";
 
 export function Explore() {
   const { fetchPosts, state } = usePost();
-
+  const { isBookmarked } = useUser();
   useEffect(() => {
     console.log(fetchPosts());
-  }, []);
+    //eslint-disable-next-line
+  }, [isBookmarked]);
   return (
     <>
       <div className="grid-container">

@@ -1,14 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 
 import { PostReducer } from "../Reducers/PostReducer";
 import { useToast } from "./ToastContext";
 import { useAuth } from "./AuthContext";
+import { useUser } from "./UserContext";
 export const PostContext = createContext();
 
 export function usePost() {
@@ -21,6 +16,8 @@ export function PostProvider({ children }) {
   const {
     auth: { token },
   } = useAuth();
+
+  //gets posts from server
   async function fetchPosts() {
     try {
       setIsLoading(() => true);
@@ -37,13 +34,13 @@ export function PostProvider({ children }) {
       setIsLoading(() => true);
     }
   }
+  // gets specific user posts from server
   async function fetchUserPosts(username) {
     try {
       setIsLoading(() => true);
       const response = await fetch(`/api/posts/user/${username}`);
       const { posts } = await response.json();
       if (response.status === 200) {
-        console.log({ posts });
         dispatch({ type: "SET_POSTS", payload: posts });
       }
     } catch (err) {
@@ -53,7 +50,7 @@ export function PostProvider({ children }) {
       setIsLoading(() => true);
     }
   }
-
+  // gets specific post using id
   async function fetchSinglePost(postId) {
     try {
       setIsLoading(() => true);
@@ -70,6 +67,8 @@ export function PostProvider({ children }) {
       setIsLoading(() => false);
     }
   }
+
+  // posts a post to server
   async function createPostHandler(post) {
     try {
       setIsLoading(() => true);
@@ -91,6 +90,8 @@ export function PostProvider({ children }) {
       setIsLoading(() => false);
     }
   }
+
+  // edits already saved post and send to server
   async function editPostHandler(post) {
     try {
       setIsLoading(() => true);
@@ -115,6 +116,8 @@ export function PostProvider({ children }) {
       setIsLoading(() => false);
     }
   }
+
+  // deletes a specific post
   async function deletePostHandler(post) {
     try {
       setIsLoading(() => true);
@@ -148,6 +151,7 @@ export function PostProvider({ children }) {
     }
   }
 
+  // likes a post
   async function likePostHandler(post) {
     try {
       setIsLoading(() => true);
@@ -180,6 +184,7 @@ export function PostProvider({ children }) {
       setIsLoading(() => false);
     }
   }
+  // unlikes the post already liked
   async function disLikePostHandler(post) {
     try {
       setIsLoading(() => true);
@@ -251,6 +256,9 @@ export function PostProvider({ children }) {
         isLiked,
         setIsLiked,
         isLikedByUser,
+        isLoading,
+        setIsLoading,
+        // isBookmarkedByUser,
       }}
     >
       {children}

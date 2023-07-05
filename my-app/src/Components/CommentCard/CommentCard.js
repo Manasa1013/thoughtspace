@@ -10,9 +10,11 @@ export function CommentCard({ comment, postUserName }) {
           />
         </div>
         <div className="flex p-4 flex-col">
-          <div className="p-1 text-gray-900">{comment.username}</div>
-          <div className="p-1">Replying to {postUserName}</div>
-          <div className="p-1">{comment.comment}</div>
+          <div className="p-1 text-gray-900 text-md">{comment.username}</div>
+          <div className="p-1 text-sm text-gray-500 leading-1">
+            Replying to {postUserName}
+          </div>
+          <div className="p-1 leading-1">{comment?.text}</div>
           <div className="flex flex-row justify-between p-1">
             <button className="icon--button bg-white">
               <i className="fi fi-rs-heart text-teal-600"></i>
