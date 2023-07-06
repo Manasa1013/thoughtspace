@@ -10,7 +10,7 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: "xhzTkUi2Nt",
-    content: "Nice Weather Today!!",
+    content: "hello literally everyone",
     mediaURL: "",
     likes: {
       likeCount: 5,
@@ -20,8 +20,8 @@ export const posts = [
     comments: [
       {
         _id: "okzxcf",
-        username: "janedoe",
-        text: "I agree!! Feels like we should go for outing. What say?",
+        username: "jackwilliam",
+        text: "Hey Taylor!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -29,8 +29,8 @@ export const posts = [
       },
     ],
     username: "Taylor_Swift",
-    createdAt: "2022-01-10T10:55:06+05:30",
-    updatedAtAt: "2022-01-10T10:55:06+05:30",
+    createdAt: "2023-06-20T20:55:06+05:30",
+    updatedAtAt: "2023-06-20T20:55:06+05:30",
   },
   {
     _id: "siFFxfYI1s",
@@ -43,9 +43,9 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "carlsmith",
-    createdAt: "2022-05-21T10:55:06+05:30",
-    updatedAt: "2022-05-21T10:55:06+05:30",
+    username: "michaelsmith",
+    createdAt: "2023-06-21T20:55:06+05:30",
+    updatedAt: "2023-06-21T20:55:06+05:30",
   },
   {
     _id: "3XHvLP1fg",
@@ -60,7 +60,7 @@ export const posts = [
     comments: [
       {
         _id: "6nImWvImxo",
-        username: "johndoe",
+        username: "jamesrobert",
         text: "That's mouth watering! Could you make one for my Birthday as well?",
         votes: {
           upvotedBy: [],
@@ -68,9 +68,9 @@ export const posts = [
         },
       },
     ],
-    username: "janedoe",
-    createdAt: "2022-02-10T10:55:06+05:30",
-    updatedAt: "2022-02-10T10:55:06+05:30",
+    username: "jackwilliam",
+    createdAt: "2023-06-20T20:55:06+05:30",
+    updatedAt: "2023-06-20T20:55:06+05:30",
   },
   {
     _id: "MTYtVhecCj",
@@ -84,14 +84,14 @@ export const posts = [
     },
     comments: [],
     username: "adarshbalika",
-    createdAt: "2022-03-06T10:55:06+05:30",
-    updatedAt: "2022-03-06T10:55:06+05:30",
+    createdAt: "2023-06-06T20:55:06+05:30",
+    updatedAt: "2023-06-06T20:55:06+05:30",
   },
   {
     _id: "3XHvLP9kC",
     content: "Yayy! Its my Birthday Today. Made this cake for myself!",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647014336/ecommerce/chocolatecake4.webp",
+      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647064336/ecommerce/chocolatecake4.webp",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -100,7 +100,7 @@ export const posts = [
     comments: [
       {
         _id: "EO7iOPN9n8",
-        username: "carlsmith",
+        username: "michaelsmith",
         text: "Happy Birthday! Enjoy your Day!!",
         votes: {
           upvotedBy: [],
@@ -109,7 +109,7 @@ export const posts = [
       },
       {
         _id: "QK52wf6HI1",
-        username: "janedoe",
+        username: "jackwilliam",
         text: "Wow! Looks Amazzing! Happy Birthday!",
         votes: {
           upvotedBy: [],
@@ -118,8 +118,8 @@ export const posts = [
       },
     ],
     username: "adarshbalika",
-    createdAt: "2022-03-15T10:55:06+05:30",
-    updatedAt: "2022-03-15T10:55:06+05:30",
+    createdAt: "2023-06-15T20:55:06+05:30",
+    updatedAt: "2023-06-15T20:55:06+05:30",
   },
   {
     _id: "tHaThLyFQh",
@@ -133,8 +133,8 @@ export const posts = [
     },
     comments: [],
     username: "adarshbalika",
-    createdAt: "2022-04-06T10:55:06+05:30",
-    updatedAt: "2022-04-06T10:55:06+05:30",
+    createdAt: "2023-06-06T20:55:06+05:30",
+    updatedAt: "2023-06-06T20:55:06+05:30",
   },
   {
     _id: "G-Gi3lSZP9",
@@ -147,8 +147,8 @@ export const posts = [
     },
     comments: [],
     username: "adarshbalika",
-    createdAt: "2022-05-06T10:55:06+05:30",
-    updatedAt: "2022-05-06T10:55:06+05:30",
+    createdAt: "2023-06-06T20:55:06+05:30",
+    updatedAt: "2023-06-06T20:55:06+05:30",
   },
   {
     _id: "GeMUAdi9mh",
@@ -162,23 +162,23 @@ export const posts = [
     },
     comments: [],
     username: "adarshbalika",
-    createdAt: "2022-03-06T12:55:06+05:30",
-    updatedAt: "2022-03-06T12:55:06+05:30",
+    createdAt: "2023-06-06T12:55:06+05:30",
+    updatedAt: "2023-06-06T12:55:06+05:30",
   },
   {
     _id: "IyUlYXTrzZ",
     content: "Who's up for Pineapple Pastry?",
     mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647014828/ecommerce/pineapplemuffin1.webp",
+      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647064828/ecommerce/pineapplemuffin1.webp",
     likes: {
-      likeCount: 10,
+      likeCount: 20,
       likedBy: [],
       dislikedBy: [],
     },
     comments: [
       {
         _id: "6nIffvImxo",
-        username: "sophiajones",
+        username: "mihirajonas",
         text: "Oh! That looks Delicious!",
         votes: {
           upvotedBy: [],
@@ -187,8 +187,8 @@ export const posts = [
       },
     ],
     username: "Taylor_Swift",
-    createdAt: "2022-04-10T10:55:06+05:30",
-    updatedAt: "2022-04-10T10:55:06+05:30",
+    createdAt: "2023-06-20T20:55:06+05:30",
+    updatedAt: "2023-06-20T20:55:06+05:30",
   },
   {
     _id: "Ie92xOSVeU",
@@ -203,7 +203,7 @@ export const posts = [
     comments: [
       {
         _id: "6fgd534s",
-        username: "janedoe",
+        username: "jackwilliam",
         text: "Yes! I am also learning from there!",
         votes: {
           upvotedBy: [],
@@ -211,9 +211,9 @@ export const posts = [
         },
       },
     ],
-    username: "alexmaxwell",
-    createdAt: "2022-04-12T10:55:06+05:30",
-    updatedAt: "2022-04-12T10:55:06+05:30",
+    username: "henryduo",
+    createdAt: "2023-06-12T20:55:06+05:30",
+    updatedAt: "2023-06-12T20:55:06+05:30",
   },
   {
     _id: "xhzTkUyfNt",
@@ -235,9 +235,9 @@ export const posts = [
         },
       },
     ],
-    username: "sophiajones",
-    createdAt: "2022-05-15T10:55:06+05:30",
-    updatedAt: "2022-05-15T10:55:06+05:30",
+    username: "mihirajonas",
+    createdAt: "2023-06-15T20:55:06+05:30",
+    updatedAt: "2023-06-15T20:55:06+05:30",
   },
   {
     _id: "CCmJpDnnQQ",
@@ -251,8 +251,8 @@ export const posts = [
     },
     comments: [],
     username: "Taylor_Swift",
-    createdAt: "2022-02-10T10:55:06+05:30",
-    updatedAt: "2022-02-10T10:55:06+05:30",
+    createdAt: "2023-06-20T20:55:06+05:30",
+    updatedAt: "2023-06-20T20:55:06+05:30",
   },
 
   {
@@ -266,9 +266,9 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "johndoe",
-    createdAt: "2022-01-12T10:55:06+05:30",
-    updatedAt: "2022-01-12T10:55:06+05:30",
+    username: "jamesrobert",
+    createdAt: "2023-06-12T20:55:06+05:30",
+    updatedAt: "2023-06-12T20:55:06+05:30",
   },
 
   {
@@ -281,9 +281,9 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "alexmaxwell",
-    createdAt: "2022-01-26T10:55:06+05:30",
-    updatedAt: "2022-01-26T10:55:06+05:30",
+    username: "henryduo",
+    createdAt: "2023-06-26T20:55:06+05:30",
+    updatedAt: "2023-06-26T20:55:06+05:30",
   },
 
   {
@@ -297,8 +297,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "carlsmith",
-    createdAt: "2022-03-10T10:55:06+05:30",
+    username: "michaelsmith",
+    createdAt: "2023-06-20T20:55:06+05:30",
     updatedAt: formatDate(),
   },
 
@@ -312,9 +312,9 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "sophiajones",
-    createdAt: "2022-04-10T10:55:06+05:30",
-    updatedAt: "2022-04-10T10:55:06+05:30",
+    username: "mihirajonas",
+    createdAt: "2023-06-20T20:55:06+05:30",
+    updatedAt: "2023-06-20T20:55:06+05:30",
   },
 
   {
@@ -328,7 +328,7 @@ export const posts = [
     },
     comments: [],
     username: "Taylor_Swift",
-    createdAt: "2022-04-10T10:55:06+05:30",
+    createdAt: "2023-06-20T20:55:06+05:30",
     updatedAt: formatDate(),
   },
 
@@ -343,9 +343,9 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "carlsmith",
-    createdAt: "2022-01-14T10:55:06+05:30",
-    updatedAt: "2022-01-14T10:55:06+05:30",
+    username: "michaelsmith",
+    createdAt: "2023-06-14T20:55:06+05:30",
+    updatedAt: "2023-06-14T20:55:06+05:30",
   },
 
   {
@@ -359,8 +359,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "janedoe",
-    createdAt: "2022-05-10T10:55:06+05:30",
+    username: "jackwilliam",
+    createdAt: "2023-06-20T20:55:06+05:30",
     updatedAt: formatDate(),
   },
 
@@ -375,9 +375,9 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "alexmaxwell",
-    createdAt: "2022-02-14T10:55:06+05:30",
-    updatedAt: "2022-02-14T10:55:06+05:30",
+    username: "henryduo",
+    createdAt: "2023-06-14T20:55:06+05:30",
+    updatedAt: "2023-06-14T20:55:06+05:30",
   },
 
   {
@@ -392,8 +392,8 @@ export const posts = [
     },
     comments: [],
     username: "Taylor_Swift",
-    createdAt: "2022-01-15T10:55:06+05:30",
-    updatedAt: "2022-01-15T10:55:06+05:30",
+    createdAt: "2023-06-15T20:55:06+05:30",
+    updatedAt: "2023-06-15T20:55:06+05:30",
   },
 
   {
@@ -407,9 +407,9 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "sophiajones",
-    createdAt: "2022-05-10T10:55:06+05:30",
-    updatedAt: "2022-05-10T10:55:06+05:30",
+    username: "mihirajonas",
+    createdAt: "2023-06-20T20:55:06+05:30",
+    updatedAt: "2023-06-20T20:55:06+05:30",
   },
 
   {
@@ -422,8 +422,8 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
-    username: "janedoe",
-    createdAt: "2022-02-10T10:55:06+05:30",
-    updatedAt: "2022-02-10T10:55:06+05:30",
+    username: "jackwilliam",
+    createdAt: "2023-06-20T20:55:06+05:30",
+    updatedAt: "2023-06-20T20:55:06+05:30",
   },
 ];

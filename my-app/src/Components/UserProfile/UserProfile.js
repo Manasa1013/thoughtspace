@@ -1,11 +1,13 @@
+import { useState } from "react";
 import { useAuth } from "../../Contexts/AuthContext";
-
-export function UserProfile() {
+import { useUser } from "../../Contexts/UserContext";
+export function UserProfile2() {
   const { auth, setAuth, logoutHandler } = useAuth();
+  const { state: userState } = useUser();
   console.log({ auth });
   return (
     <>
-      <div className="bg-white mr-16 p-2 mt-2">
+      <div className="bg-white mr-16 p-2 mt-2 text-teal-800">
         <div className="flex flex-column flex-nowrap p-2">
           <img
             className="rounded-full bg-gray-500 w-12 h-12 mr-2 aspect-square"
@@ -62,6 +64,61 @@ export function UserProfile() {
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+export function UserProfile({ username }) {
+  const { auth, setAuth, logoutHandler } = useAuth();
+  const { state: userState, getUserByName } = useUser();
+  const foundUser = getUserByName(username);
+  console.log({ foundUser });
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center bg-white text-teal-800">
+        <div className="">
+          <img
+            className="rounded-full bg-gray-500 w-28 h-28 m-2 aspect-square"
+            src="https://pbs.twimg.com/profile_images/1631883791928299521/KGWtSScG_400x400.jpg"
+          />
+        </div>
+        <div className="">
+          <h3 className="pt-4 text-lg leading-4 font-lg">
+            {foundUser?.firstName + "  " + foundUser?.lastName}
+          </h3>
+          {/* <h3 className="pt-1 text-md leading-4">{user?.username}</h3> */}
+
+          <p className="leading-4 text-gray-400 text-sm font-md">{`@${foundUser?.username}`}</p>
+          {/* <p className="leading-4 text-gray-400 text-sm font-md">{`@${user?.username}`}</p> */}
+        </div>
+        <FollowDetails user={foundUser} />
+        {/* <FollowDetails user={user} /> */}
+      </div>
+    </>
+  );
+}
+
+export function FollowDetails({ user }) {
+  const { auth } = useAuth();
+
+  return (
+    <>
+      {user.username === auth?.user?.username && (
+        <button
+          type="button"
+          className="text-teal-700 bg-white border-teal-700 font-md text-md py-3 px-2 m-2"
+        >
+          Edit Profile
+        </button>
+      )}
+      {user.username !== auth?.user?.username && (
+        <button
+          type="button"
+          className="text-teal-700 bg-white border-teal-700 font-md text-md py-3 px-2 m-2"
+        >
+          Follow
+        </button>
+      )}
     </>
   );
 }

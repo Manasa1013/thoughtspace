@@ -1,4 +1,10 @@
+import { Link } from "react-router-dom";
+
+import { useUser } from "../../Contexts/UserContext";
+
 export function CommentCard({ comment, postUserName }) {
+  const { getUserByName } = useUser();
+  const commentUser = getUserByName(comment?.username);
   return (
     <>
       <div className="flex flex-row">
@@ -10,9 +16,10 @@ export function CommentCard({ comment, postUserName }) {
           />
         </div>
         <div className="flex p-4 flex-col">
-          <div className="p-1 text-gray-900 text-md">{comment.username}</div>
+          <div className="p-1 text-gray-900 text-md">{`${commentUser?.firstName} ${commentUser?.lastName}`}</div>
           <div className="p-1 text-sm text-gray-500 leading-1">
-            Replying to {postUserName}
+            Replying to{" "}
+            <Link to={`/users/${postUserName}`}>@{postUserName}</Link>
           </div>
           <div className="p-1 leading-1">{comment?.text}</div>
           <div className="flex flex-row justify-between p-1">

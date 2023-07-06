@@ -38,8 +38,9 @@ export function PostCard({ post: postData }) {
     isLoading: isUserLoading,
     state: userState,
     userBookmarks,
+    getUserByName,
   } = useUser();
-
+  const postUser = getUserByName(username);
   return !isUserLoading ? (
     <div className="flex flex-row bg-white gap-2 my-4 ">
       <div className="flex flex-row p-1 m-1 pr-0 aspect-square">
@@ -53,7 +54,7 @@ export function PostCard({ post: postData }) {
         <div className="flex flex-col  gap-1 p-4">
           <div className="flex flex-row gap-1 justify-between relative">
             <div className="flex flex-row gap-1">
-              <p className="text-teal-800 text-lg leading-4">{username}</p>
+              <p className="text-teal-800 text-lg leading-4">{`${postUser?.firstName}  ${postUser?.lastName}`}</p>
               <p className="text-xs text-gray-500 leading-4">{`• ${getDateText(
                 createdAt
               )}`}</p>
@@ -164,7 +165,7 @@ export function PostCard({ post: postData }) {
           </div>
           <div className="break-word">
             <div className="text-teal-800 text-sm text-left">
-              <Link to="/users">{`@${username}`}</Link>
+              <Link to={`/users/${username}`}>{`@${username}`}</Link>
             </div>
             <Link to={`/posts/${postId}`}>
               <p className="leading-2">

@@ -3,9 +3,9 @@ import { usePost } from "../../Contexts/PostContext";
 
 import { getActiveClassName } from "../../utils/CommonFunctions";
 import "./LeftSideNav.css";
+import { useAuth } from "../../Contexts/AuthContext";
 export function LeftSideNav() {
-  const { state, dispatch } = usePost();
-
+  const { auth } = useAuth();
   return (
     <div className="bg-white p-4 fixed top-0 bottom-0 left-0 mr-12 mt-16 ">
       <div className="flex flex-col justify-between items-center py-4">
@@ -29,7 +29,7 @@ export function LeftSideNav() {
             <span className="p-4">Explore</span>
           </NavLink>
           <NavLink
-            to="/bookmarks"
+            to={auth?.token ? "/bookmarks" : "/login"}
             className={({ isActive, isPending }) =>
               getActiveClassName(isActive, isPending)
             }
@@ -38,7 +38,7 @@ export function LeftSideNav() {
             <span className="p-4">Bookmarks</span>
           </NavLink>
           <NavLink
-            to="/profile"
+            to={auth?.token ? `/users/${auth?.user?.username}` : `/login`}
             className={({ isActive, isPending }) =>
               getActiveClassName(isActive, isPending)
             }

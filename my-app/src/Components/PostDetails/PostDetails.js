@@ -1,4 +1,4 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../Contexts/AuthContext";
 import { usePost } from "../../Contexts/PostContext";
@@ -7,7 +7,6 @@ import { CommentCard } from "../CommentCard/CommentCard";
 import { getDateText } from "../../utils/CommonFunctions";
 import "./PostDetails.css";
 import { useUser } from "../../Contexts/UserContext";
-import { useEffect } from "react";
 export function PostDetails({ post, postId }) {
   const navigate = useNavigate();
 
@@ -30,7 +29,10 @@ export function PostDetails({ post, postId }) {
     setIsBookmarked,
     bookmarkPostHandler,
     removeBookmarkHandler,
+    getUserByName,
   } = useUser();
+  const postUser = getUserByName(post.username);
+  console.log(postUser);
   return (
     <section className="p-4" key={postId}>
       <div className="flex flex-row bg-white gap-2 my-4">
@@ -38,7 +40,11 @@ export function PostDetails({ post, postId }) {
           <img
             src="http://bit.ly/42Zm7tM"
             className="rounded-full bg-teal-400 w-10 h-10"
-            alt={user ? user?.username : "UserProfile"}
+            alt={
+              postUser
+                ? `${postUser?.firstName} ${postUser?.lastName}`
+                : "UserProfile"
+            }
           />
         </div>
         <div className="flex flex-row bg-white gap-2 my-2 w-3/4">
@@ -46,7 +52,7 @@ export function PostDetails({ post, postId }) {
             <div className="flex flex-row gap-1 justify-between relative">
               <div className="flex flex-row gap-1">
                 <p className="text-teal-800 text-lg leading-4">
-                  {post.username}
+                  {`${postUser?.firstName} ${postUser?.lastName}`}
                 </p>
                 <p className="text-xs text-gray-500 leading-4">{`• ${getDateText(
                   post.createdAt
@@ -160,7 +166,9 @@ export function PostDetails({ post, postId }) {
             </div>
             <div className="break-word">
               <div className="text-teal-800 text-sm text-left">
-                <Link to="/users">{`@${post.username}`}</Link>
+                <Link
+                  to={`/users/${post.username}`}
+                >{`@${post.username}`}</Link>
               </div>
               <p className="leading-2">
                 {post?.content ? post.content : "No content to display"}

@@ -27,6 +27,7 @@ export function UserProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [userBookmarks, setUserBookmarks] = useState([]);
+  const [user, setUser] = useState({});
   //bookmark a post to server
   async function bookmarkPostHandler(post, username) {
     try {
@@ -107,10 +108,26 @@ export function UserProvider({ children }) {
   async function fetchUsers() {
     try {
       setIsLoading(() => true);
-      const response = await fetch("/api/users");
+      const response = await fetch(`/api/users/`);
       const { users } = await response.json();
       if (response.status === 200) {
         dispatch({ type: "SET_USERS", payload: users });
+      }
+    } catch (err) {
+      console.error("error at fetching users");
+      showToastBar("Error at fetching Posts");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
+
+  //get specific user details
+  async function fetchUser(userId) {
+    try {
+      const response = await fetch(`/api/users/${userId}`);
+      const { user } = await response.json();
+      if (response.status === 200) {
+        return user;
       }
     } catch (err) {
       console.error("error at fetching users");
@@ -176,6 +193,9 @@ export function UserProvider({ children }) {
       console.error(err, "at isBookmarkPost");
     }
   }
+  function getUserByName(username) {
+    return state?.users?.find((userItem) => userItem.username === username);
+  }
 
   return (
     <UserContext.Provider
@@ -185,12 +205,16 @@ export function UserProvider({ children }) {
         bookmarkPostHandler,
         removeBookmarkHandler,
         fetchUserBookmarks,
+        fetchUser,
         isLoading,
         isBookmarked,
         setIsBookmarked,
         isBookmarkedByUser,
         userBookmarks,
         setUserBookmarks,
+        user,
+        setUser,
+        getUserByName,
       }}
     >
       {children}
