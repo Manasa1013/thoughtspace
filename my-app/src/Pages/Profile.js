@@ -8,7 +8,7 @@ export function Profile() {
     <>
       <div className="grid-container">
         <Navbar />
-        <aside className="bg-white">
+        <aside className="bg-white aside-left">
           <LeftSideNav />
         </aside>
         <main className="main">

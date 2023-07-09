@@ -15,8 +15,11 @@ export function RightSideNav({ posts }) {
   }
   const sortOptionsList = ["Trending", "Latest"];
   return (
-    <div className="bg-white p-4 fixed top-0 right-0 mr-10 mt-20 ">
-      <h2 className="text-teal-800 font-bold text-lg">Sort By</h2>
+    <div className="bg-white p-4  md:fixed md:top-0 md:right-0 md:mr-10 md:mt-20 sticky top-20">
+      <h2 className="text-teal-800 font-bold text-lg hidden md:block">
+        Sort By
+      </h2>
+      <div className="visible"></div>
       <select
         className="outline-teal-600/50 text-md text-teal-700"
         onChange={(e) => {

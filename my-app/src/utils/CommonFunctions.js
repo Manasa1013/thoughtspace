@@ -25,8 +25,8 @@ export function getTrimmed(sentence, n) {
 
 export function getActiveClassName(isActive, isPending) {
   return isPending
-    ? "pending"
+    ? "pending p-4 md:py-2 md:px-1 w-full md:w-auto"
     : isActive
-    ? "font-bold text-teal-700"
-    : "text-gray-700";
+    ? "font-bold text-slate-100 p-4 md:py-2 md:px-1 bg-teal-600/100 w-full md:w-auto md:bg-inherit md:text-teal-700"
+    : "text-gray-700 p-4 md:py-2 md:px-1 w-full md:w-auto md:bg-inherit";
 }

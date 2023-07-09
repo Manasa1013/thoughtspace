@@ -37,15 +37,12 @@ export function SinglePostPage() {
     <>
       <div className="grid-container">
         <Navbar />
-        <aside className="bg-white">
+        <aside className="bg-white aside-left">
           <LeftSideNav />
         </aside>
         <main className="main">
           {isLoading ? <Loader /> : <PostDetails post={post} postId={postId} />}
         </main>
-        <aside className="bg-white">
-          <RightSideNav />
-        </aside>
       </div>
     </>
   );

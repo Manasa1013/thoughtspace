@@ -164,7 +164,7 @@ export function PostDetails({ post, postId }) {
                 ""
               )}
             </div>
-            <div className="break-word">
+            <div className="break-words">
               <div className="text-teal-800 text-sm text-left">
                 <Link
                   to={`/users/${post.username}`}

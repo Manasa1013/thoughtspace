@@ -14,13 +14,13 @@ export function Explore() {
     <>
       <div className="grid-container">
         <Navbar />
-        <aside className="bg-white">
+        <aside className="bg-white aside-left">
           <LeftSideNav />
         </aside>
         <main className="main">
           <PostList posts={state?.posts} />
         </main>
-        <aside className="bg-white">
+        <aside className="bg-white aside-right">
           <RightSideNav posts={state?.posts} />
         </aside>
       </div>

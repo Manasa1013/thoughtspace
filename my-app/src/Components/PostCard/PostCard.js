@@ -163,14 +163,14 @@ export function PostCard({ post: postData }) {
               ""
             )}
           </div>
-          <div className="break-word">
+          <div className="break-words">
             <div className="text-teal-800 text-sm text-left">
               <Link to={`/users/${username}`}>{`@${username}`}</Link>
             </div>
             <Link to={`/posts/${postId}`}>
               <p className="leading-2">
                 {postDescription
-                  ? getTrimmed(postDescription, 15)
+                  ? `${getTrimmed(postDescription, 6)}...`
                   : "No content to display"}
               </p>
             </Link>

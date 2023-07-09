@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { Navbar, PostList, LeftSideNav, Loader } from "../Components";
+import {
+  Navbar,
+  PostList,
+  LeftSideNav,
+  Loader,
+  RightSideNav,
+} from "../Components";
 import { useAuth } from "../Contexts/AuthContext";
 import { useUser } from "../Contexts/UserContext";
 import { usePost } from "../Contexts/PostContext";
@@ -46,16 +52,16 @@ export function Bookmarks() {
     <>
       <div className="grid-container">
         <Navbar />
-        <aside className="bg-white">
+        <aside className="bg-white aside-left">
           <LeftSideNav />
         </aside>
         <main className="main">
-          <h2> Bookmarks</h2>
+          <h2 className="text-teal-700 font-semibold text-2xl leading-4 p-4">
+            {" "}
+            Bookmarks
+          </h2>
           {isUserLoading ? <Loader /> : <PostList posts={userBookmarks} />}
         </main>
-        {/* <aside className="bg-white"> */}
-        {/* <RightSideNav posts={state?.posts} /> */}
-        {/* </aside> */}
       </div>
     </>
   );

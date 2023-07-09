@@ -1,7 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import "./Navbar.css";
+import { useAuth } from "../../Contexts/AuthContext";
 export function Navbar() {
+  const {
+    auth: { user },
+  } = useAuth();
+
   return (
     <nav className="nav sticky  top-0 bg-teal-600/100 text-white z-30 shadow flex justify-between items-center py-6 px-4 m-0 text-lg md:font-medium font-semibold">
       <header className="inline">
@@ -10,7 +15,7 @@ export function Navbar() {
         </NavLink>
       </header>
       <ul className="flex"></ul>
-      <NavLink to="/users">
+      <NavLink to={`/users/${user?.username}`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -26,7 +31,6 @@ export function Navbar() {
           />
         </svg>
       </NavLink>
-      <NavLink to="/posts">Posts</NavLink>
     </nav>
   );
 }
