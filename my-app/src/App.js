@@ -30,7 +30,7 @@ function App() {
   }, [toast, hideToastBar]);
 
   return (
-    <div className="App bg-gray-100">
+    <div className="App">
       <Routes>
         <Route
           path="/login"

@@ -14,6 +14,7 @@
   --pastel-blue: rgb(154, 208, 236);
   --primary-text: rgb(50, 49, 48);
   --secondary-text: rgb(100, 116, 139);
+  --gray-100 : #f3f4f6;
   --tw-text-opacity: 1;
   --blue: rgb(37, 100, 207);
   --secondary-blue: rgb(0, 120, 212);
@@ -21,11 +22,20 @@
   --error-red: red;
   --light-emerald: #4ade80;
 }
-
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
 body {
   font-family: "Titillium Web", sans-serif;
   margin: 0;
-}
+  min-height: 100%;
+  width: 100%;
+  background-color: var(--gray-100);
+  }
+  
+  
 
 * {
   box-sizing: border-box;
@@ -46,14 +56,12 @@ body {
 .grid-container {
   display: grid;
   height: max-content;
-  grid-template-columns: 0.8fr 2.5fr 0.7fr;
+  grid-template-columns: 1fr;
   grid-template-areas:
-    "nav nav nav"
-    "aside-left main aside-right"
-    "aside-left main aside-right"
-    "aside-left main aside-right";
-  gap: 1rem;
-  justify-items: center;
+    "nav"
+    "aside-right"
+    "main"
+    "aside-left";
   align-items: center;
   justify-content: space-between;
   margin-bottom: 3rem;
@@ -234,7 +242,22 @@ body {
   margin: 0;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (min-width: 768px) {
+  .grid-container {
+      display: grid;
+      height: max-content;
+      grid-template-columns: 0.8fr 2.5fr 0.7fr;
+      grid-template-areas:
+        "nav nav nav"
+        "aside-left main aside-right"
+        "aside-left main aside-right"
+        "aside-left main aside-right";
+      gap: 1rem;
+      justify-items: center;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
   .nav--links {
     flex-direction: row;
   }
