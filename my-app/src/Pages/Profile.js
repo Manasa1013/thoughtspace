@@ -3,7 +3,6 @@ import { UserProfile, Navbar, LeftSideNav } from "../Components";
 
 export function Profile() {
   const { username } = useParams();
-
   return (
     <>
       <div className="grid-container">

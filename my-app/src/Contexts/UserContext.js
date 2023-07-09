@@ -28,6 +28,7 @@ export function UserProvider({ children }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [userBookmarks, setUserBookmarks] = useState([]);
   const [user, setUser] = useState({});
+
   //bookmark a post to server
   async function bookmarkPostHandler(post, username) {
     try {
@@ -235,6 +236,38 @@ export function UserProvider({ children }) {
     }
   }
 
+  // This handler edits user details
+  async function editUserHandler(toBeEditedUser) {
+    try {
+      setIsLoading(() => true);
+      console.log({ toBeEditedUser });
+      const response = await fetch(`/api/users/edit`, {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ userData: toBeEditedUser }),
+      });
+      const { user } = await response.json();
+      console.log({ response }, { user });
+      if (response.status === 201) {
+        dispatch({
+          type: "SET_EDITED_USER",
+          payload: { user },
+        });
+
+        showToastBar("Saved user details");
+      } else if (response.status === 500) {
+        showToastBar("Error at server , Please try again");
+      } else if (response.status === 404) {
+        showToastBar("User does not exist<Try logging in");
+      }
+    } catch (err) {
+      console.error(err, "error at editUserHandler");
+      showToastBar("Something went wrong,try again");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -277,6 +310,7 @@ export function UserProvider({ children }) {
         fetchUser,
         followUserHandler,
         unfollowUserHandler,
+        editUserHandler,
         isLoading,
         isBookmarked,
         setIsBookmarked,

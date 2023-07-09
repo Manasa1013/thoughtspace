@@ -5,6 +5,7 @@ import { useUser } from "../../Contexts/UserContext";
 import { usePost } from "../../Contexts/PostContext";
 import { PostList } from "../PostList/PostList";
 import "./UserProfile.css";
+import { EditProfile } from "../EditProfile/EditProfile";
 export function UserProfile2() {
   const { auth, setAuth, logoutHandler } = useAuth();
   const { state: userState } = useUser();
@@ -80,33 +81,37 @@ export function UserProfile({ username }) {
   useEffect(() => {
     fetchUserPosts(username)
       .then((res) => {
-        console.log({ res }, "at home");
+        console.log(res, "at UserProfile");
       })
       .catch((err) => {
         console.error(err, "error at fetching user posts");
       });
-  }, [username]);
+  }, [foundUser?.updatedAt, username]);
   console.log({ foundUser });
   return (
     <>
       <div className="text-teal-800 w-96 bg-gray-100 flex flex-col justify-center items-center">
         <div className="flex flex-col items-center justify-center bg-white w-11/12  ">
           <div className="flex md:flex-row flex-col items-center justify-evenly bg-white text-teal-800">
-            <div className="">
+            <div className="w-3/4 flex flex-col items-center justify-center object-cover">
               <img
-                className="rounded-full bg-gray-500 md:w-32 md:h-32 h-24 w-24 m-2 aspect-square"
-                src="https://pbs.twimg.com/profile_images/1631883791928299521/KGWtSScG_400x400.jpg"
+                className="rounded-full bg-teal-500 md:w-32 md:h-32 h-24 w-24 m-2 aspect-square"
+                src={
+                  foundUser?.avatarUrl
+                    ? foundUser?.avatarUrl
+                    : "http://bit.ly/42Zm7tM"
+                }
               />
             </div>
             <div className="flex flex-col items-center justify-between bg-white ">
-              <div className="">
+              <div className="flex flex-col items-center justify-center">
                 <h3 className="pt-4 text-lg leading-4 font-semibold">
                   {foundUser?.firstName + "  " + foundUser?.lastName}
                 </h3>
                 <p className="leading-4 text-gray-400 text-sm font-medium pt-1">{`@${foundUser?.username}`}</p>
-                <div className="py-4 my-2 text-teal-900 text-lg ">
+                <p className="py-4 my-2 text-teal-900 text-sm break-words leading-1">
                   {foundUser?.bio}
-                </div>
+                </p>
               </div>
               <FollowDetails user={foundUser} />
               <div className="py-1 my-1 text-blue-500 text-sm break-all">
@@ -129,11 +134,22 @@ export function FollowDetails({ user }) {
   const { auth } = useAuth();
   const { followUserHandler, unfollowUserHandler } = useUser();
   const [isFollowing, setIsFollowing] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
   return (
-    <>
+    <section className="relative">
+      {showEditUserModal && (
+        <EditProfile
+          user={user}
+          showEditUserModal={showEditUserModal}
+          setShowEditUserModal={setShowEditUserModal}
+        />
+      )}
       {user?.username === auth?.user?.username && (
         <button
           type="button"
+          onClick={() => {
+            setShowEditUserModal((prev) => !prev);
+          }}
           className="text-teal-700 bg-white border-teal-700 font-semibold text-md py-3 px-2 m-2"
         >
           Edit Profile
@@ -154,7 +170,7 @@ export function FollowDetails({ user }) {
           {isFollowing ? "Unfollow" : "Follow"}
         </button>
       )}
-    </>
+    </section>
   );
 }
 

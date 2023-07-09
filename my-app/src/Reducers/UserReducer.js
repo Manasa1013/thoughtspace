@@ -53,6 +53,16 @@ export function UserReducer(state, action) {
           } else return userItem;
         }),
       };
+    case "SET_EDITED_USER":
+      console.log(action.payload, state, "at setediteduser");
+      return {
+        ...state,
+        users: state?.users?.map((userItem) => {
+          if (userItem._id === action.payload.user._id)
+            return { ...action.payload.user };
+          else return userItem;
+        }),
+      };
     default:
       return state;
   }
