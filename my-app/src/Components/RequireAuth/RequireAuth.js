@@ -4,7 +4,7 @@ import { useAuth } from "../../Contexts/AuthContext";
 export function RequireAuth({ children }) {
   const { auth } = useAuth();
   const location = useLocation();
-  if (auth.token) console.log(location, auth.token);
+  // if (auth.token) console.log(location, auth.token);
   return auth.token ? (
     <>{children}</>
   ) : (

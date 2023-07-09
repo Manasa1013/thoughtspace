@@ -38,7 +38,11 @@ export function PostDetails({ post, postId }) {
       <div className="flex flex-row bg-white gap-2 my-4">
         <div className="flex flex-row p-1 m-1 pr-0 aspect-square">
           <img
-            src="http://bit.ly/42Zm7tM"
+            src={
+              postUser?.avatarUrl
+                ? postUser?.avatarUrl
+                : "http://bit.ly/42Zm7tM"
+            }
             className="rounded-full bg-teal-400 w-10 h-10"
             alt={
               postUser

@@ -30,3 +30,29 @@ export function getActiveClassName(isActive, isPending) {
     ? "font-bold text-slate-100 p-4 md:py-2 md:px-1 bg-teal-600/100 w-full md:w-auto md:bg-inherit md:text-teal-700"
     : "text-gray-700 p-4 md:py-2 md:px-1 w-full md:w-auto md:bg-inherit";
 }
+
+//validates the fields in forms
+export function validateFields(
+  regexPattern,
+  fieldName,
+  errorName,
+  errorText,
+  errorField,
+  setErrorField
+) {
+  let errorFieldName = Object.keys(errorField).find(
+    (item) => item === errorName
+  );
+  if (regexPattern.test(fieldName)) {
+    // console.log("pattern matched", errorFieldName);
+    setErrorField((prev) => {
+      return { ...prev, [errorFieldName]: "" };
+    });
+  } else {
+    // console.log("pattern not matched", errorFieldName);
+    setErrorField((prev) => {
+      // console.log(errorName, errorText, "printing at line 34");
+      return { ...prev, [errorFieldName]: errorText };
+    });
+  }
+}

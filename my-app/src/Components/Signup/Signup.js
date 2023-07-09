@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
 import { useAuth } from "../../Contexts/AuthContext";
 import { useToast } from "../../Contexts/ToastContext";
+import { validateFields } from "../../utils/CommonFunctions";
 export const Signup = () => {
   const { setAuth, field, setField, signupHandler } = useAuth();
   const { showToastBar } = useToast();
@@ -75,30 +77,7 @@ export const Signup = () => {
       password: "",
     }));
   }
-  function validateFields(
-    regexPattern,
-    fieldName,
-    errorName,
-    errorText,
-    errorField,
-    setErrorField
-  ) {
-    let errorFieldName = Object.keys(errorField).find(
-      (item) => item === errorName
-    );
-    if (regexPattern.test(fieldName)) {
-      // console.log("pattern matched", errorFieldName);
-      setErrorField((prev) => {
-        return { ...prev, [errorFieldName]: "" };
-      });
-    } else {
-      // console.log("pattern not matched", errorFieldName);
-      setErrorField((prev) => {
-        // console.log(errorName, errorText, "printing at line 34");
-        return { ...prev, [errorFieldName]: errorText };
-      });
-    }
-  }
+
   return (
     <div className="flex min-h-full items-center justify-center py-10 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
