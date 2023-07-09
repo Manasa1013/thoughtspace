@@ -16,7 +16,7 @@ export const users = [
     bookmarks: [],
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp",
-    website: "https://romabulani.netlify.app/",
+    website: "https://manasamandalreddy.netlify.app/",
     createdAt: "2022-06-16T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -44,7 +44,7 @@ export const users = [
     bookmarks: [],
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651554256/socialmedia/avatars/jane-doe_il3cvx.webp",
-    website: "https://romabulani.netlify.app/",
+    website: "https://manasamandalreddy.netlify.app/",
     createdAt: "2023-06-23T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -57,7 +57,7 @@ export const users = [
     bio: "Rock and Roll",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651563581/socialmedia/avatars/carl-smith_mehw0u.webp",
-    website: "https://romabulani.netlify.app/",
+    website: "https://manasamandalreddy.netlify.app/",
     createdAt: "2023-06-19T10:55:06+05:30",
     updatedAt: formatDate(),
   },

@@ -166,6 +166,75 @@ export function UserProvider({ children }) {
     }
   }
 
+  // post follow request to server
+
+  async function followUserHandler(userId) {
+    try {
+      setIsLoading(() => true);
+      console.log(userId);
+      const response = await fetch(`/api/users/follow/${userId}/`, {
+        method: "POST",
+        headers: { authorization: token },
+        body: {},
+      });
+      const { user, followUser } = await response.json();
+      console.log({ user }, { followUser });
+      if (response.status === 200) {
+        dispatch({
+          type: "SET_FOLLOW_USER",
+          payload: { user, followUser },
+        });
+
+        showToastBar("Added to Following");
+      } else if (response.status === 500) {
+        showToastBar("Error at server , Please try again");
+      } else if (response.status === 404) {
+        showToastBar("Login to follow user");
+      } else if (response.status === 400) {
+        showToastBar("Following the user already");
+      }
+    } catch (err) {
+      console.error(err, "error at followUserHandler");
+      showToastBar("Something went wrong,try again");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
+
+  // unfollow specific user handler
+  async function unfollowUserHandler(userId) {
+    try {
+      setIsLoading(() => true);
+      console.log(userId);
+      const response = await fetch(`/api/users/unfollow/${userId}/`, {
+        method: "POST",
+        headers: { authorization: token },
+        body: {},
+      });
+      const { user, followUser } = await response.json();
+      console.log({ user }, { followUser });
+      if (response.status === 200) {
+        dispatch({
+          type: "SET_UNFOLLOW_USER",
+          payload: { user, followUser },
+        });
+
+        showToastBar("Unfollowed the user");
+      } else if (response.status === 500) {
+        showToastBar("Error at server , Please try again");
+      } else if (response.status === 404) {
+        showToastBar("Login to unfollow user");
+      } else if (response.status === 400) {
+        showToastBar("Unfollowed the user already");
+      }
+    } catch (err) {
+      console.error(err, "error at unfollowUserHandler");
+      showToastBar("Something went wrong,try again");
+    } finally {
+      setIsLoading(() => false);
+    }
+  }
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -206,6 +275,8 @@ export function UserProvider({ children }) {
         removeBookmarkHandler,
         fetchUserBookmarks,
         fetchUser,
+        followUserHandler,
+        unfollowUserHandler,
         isLoading,
         isBookmarked,
         setIsBookmarked,

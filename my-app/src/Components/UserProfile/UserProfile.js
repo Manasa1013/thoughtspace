@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { useAuth } from "../../Contexts/AuthContext";
 import { useUser } from "../../Contexts/UserContext";
+import { usePost } from "../../Contexts/PostContext";
+import { PostList } from "../PostList/PostList";
+import "./UserProfile.css";
 export function UserProfile2() {
   const { auth, setAuth, logoutHandler } = useAuth();
   const { state: userState } = useUser();
@@ -71,28 +75,51 @@ export function UserProfile2() {
 export function UserProfile({ username }) {
   const { auth, setAuth, logoutHandler } = useAuth();
   const { state: userState, getUserByName } = useUser();
+  const { state: postState, fetchUserPosts } = usePost();
   const foundUser = getUserByName(username);
+  useEffect(() => {
+    fetchUserPosts(username)
+      .then((res) => {
+        console.log({ res }, "at home");
+      })
+      .catch((err) => {
+        console.error(err, "error at fetching user posts");
+      });
+  }, [username]);
   console.log({ foundUser });
   return (
     <>
-      <div className="flex flex-col items-center justify-center bg-white text-teal-800">
-        <div className="">
-          <img
-            className="rounded-full bg-gray-500 w-28 h-28 m-2 aspect-square"
-            src="https://pbs.twimg.com/profile_images/1631883791928299521/KGWtSScG_400x400.jpg"
-          />
+      <div className="text-teal-800 w-96 bg-gray-100 flex flex-col justify-center items-center">
+        <div className="flex flex-col items-center justify-center bg-white w-11/12  ">
+          <div className="flex md:flex-row flex-col items-center justify-evenly bg-white text-teal-800">
+            <div className="">
+              <img
+                className="rounded-full bg-gray-500 md:w-32 md:h-32 h-24 w-24 m-2 aspect-square"
+                src="https://pbs.twimg.com/profile_images/1631883791928299521/KGWtSScG_400x400.jpg"
+              />
+            </div>
+            <div className="flex flex-col items-center justify-between bg-white ">
+              <div className="">
+                <h3 className="pt-4 text-lg leading-4 font-semibold">
+                  {foundUser?.firstName + "  " + foundUser?.lastName}
+                </h3>
+                <p className="leading-4 text-gray-400 text-sm font-medium pt-1">{`@${foundUser?.username}`}</p>
+                <div className="py-4 my-2 text-teal-900 text-lg ">
+                  {foundUser?.bio}
+                </div>
+              </div>
+              <FollowDetails user={foundUser} />
+              <div className="py-1 my-1 text-blue-500 text-sm break-all">
+                {foundUser?.website}
+              </div>
+            </div>
+          </div>
+          <FollowCard foundUser={foundUser} postState={postState} />
         </div>
-        <div className="">
-          <h3 className="pt-4 text-lg leading-4 font-lg">
-            {foundUser?.firstName + "  " + foundUser?.lastName}
-          </h3>
-          {/* <h3 className="pt-1 text-md leading-4">{user?.username}</h3> */}
-
-          <p className="leading-4 text-gray-400 text-sm font-md">{`@${foundUser?.username}`}</p>
-          {/* <p className="leading-4 text-gray-400 text-sm font-md">{`@${user?.username}`}</p> */}
+        <hr className="border-gray-100 border-2 bg-gray-100 "></hr>
+        <div className="m-2 w-full">
+          <PostList posts={postState?.posts} />
         </div>
-        <FollowDetails user={foundUser} />
-        {/* <FollowDetails user={user} /> */}
       </div>
     </>
   );
@@ -100,25 +127,54 @@ export function UserProfile({ username }) {
 
 export function FollowDetails({ user }) {
   const { auth } = useAuth();
-
+  const { followUserHandler, unfollowUserHandler } = useUser();
+  const [isFollowing, setIsFollowing] = useState(false);
   return (
     <>
-      {user.username === auth?.user?.username && (
+      {user?.username === auth?.user?.username && (
         <button
           type="button"
-          className="text-teal-700 bg-white border-teal-700 font-md text-md py-3 px-2 m-2"
+          className="text-teal-700 bg-white border-teal-700 font-semibold text-md py-3 px-2 m-2"
         >
           Edit Profile
         </button>
       )}
-      {user.username !== auth?.user?.username && (
+      {user?.username !== auth?.user?.username && (
         <button
           type="button"
-          className="text-teal-700 bg-white border-teal-700 font-md text-md py-3 px-2 m-2"
+          className="text-teal-700 bg-white border-teal-700 font-semibold text-md py-3 px-2 m-2"
+          onClick={() => {
+            isFollowing
+              ? unfollowUserHandler(user?._id)
+              : followUserHandler(user?._id);
+            console.log(user?._id);
+            setIsFollowing((prev) => !prev);
+          }}
         >
-          Follow
+          {isFollowing ? "Unfollow" : "Follow"}
         </button>
       )}
+    </>
+  );
+}
+
+export function FollowCard({ postState, foundUser }) {
+  return (
+    <>
+      <div className="flex flex-row  justify-between items-start gap-4 pb-2 ">
+        <div className="flex flex-col">
+          <p className="font-bold text-md ">{postState?.posts?.length}</p>
+          <p className="leading-1">Posts</p>
+        </div>
+        <div className="flex flex-col">
+          <p className="font-bold text-md">{foundUser?.followers?.length}</p>
+          <p className="">Followers</p>
+        </div>
+        <div className="flex flex-col">
+          <p className="font-bold text-md">{foundUser?.following?.length}</p>
+          <p className="">Following</p>
+        </div>
+      </div>
     </>
   );
 }
