@@ -34,7 +34,7 @@ export const posts = [
   },
   {
     _id: "siFFxfYI1s",
-    content: "Started my Baking journey! Look what I made.",
+    content: "Started my poetry! Let's get this started",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/video/upload/v1652188886/upload-socialmedia/oikev6eomsgahnvxcijd.mp4",
     likes: {
@@ -49,7 +49,7 @@ export const posts = [
   },
   {
     _id: "3XHvLP1fg",
-    content: "I made this cake for my friend's birthday. Check it out",
+    content: "I started blogging for myself! Will share here soon..",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652188492/upload-socialmedia/cakegif_q11mfm.webp",
     likes: {
@@ -61,7 +61,7 @@ export const posts = [
       {
         _id: "6nImWvImxo",
         username: "jamesrobert",
-        text: "That's mouth watering! Could you make one for my Birthday as well?",
+        text: "Glad to hear,awaiting!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -192,8 +192,7 @@ export const posts = [
   },
   {
     _id: "Ie92xOSVeU",
-    content:
-      "Check out this amazing video from BakinZone https://bakinzone.netlify.app/videos/qtlhdIfojmc",
+    content: "Check out this amazing video from Youtube https://youtube.com/",
     mediaURL: "",
     likes: {
       likeCount: 1,

@@ -12,7 +12,7 @@ export const users = [
     lastName: "Balika",
     username: "adarshbalika",
     password: "Adarshbalika@123",
-    bio: "Redifining!",
+    bio: "Redefining!",
     bookmarks: [],
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp",
