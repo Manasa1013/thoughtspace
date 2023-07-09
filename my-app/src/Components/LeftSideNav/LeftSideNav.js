@@ -7,9 +7,9 @@ import { useAuth } from "../../Contexts/AuthContext";
 export function LeftSideNav() {
   const { auth } = useAuth();
   return (
-    <div className="bg-white p-4 fixed top-0 bottom-0 left-0 mr-12 mt-16 ">
-      <div className="flex flex-col justify-between items-center py-4">
-        <div className="flex flex-col links-container font-normal items-start">
+    <div className="bg-white md:p-4 md:mr-12 md:mt-16 md:fixed  bottom-0 left-0 md:top-0 sticky p-0">
+      <div className="flex md:flex-col flex-row justify-between items-center  md:py-4 p-0">
+        <div className="flex md:flex-col flex-row font-normal md:text-md text-lg items-start justify-between w-full">
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
@@ -17,7 +17,7 @@ export function LeftSideNav() {
             }
           >
             <i className="fi fi-rs-home"></i>
-            <span className="p-4">Home</span>
+            <span className="p-4 hidden md:inline">Home</span>
           </NavLink>
           <NavLink
             to="/explore"
@@ -26,7 +26,7 @@ export function LeftSideNav() {
             }
           >
             <i className="fi fi-rs-circle"></i>
-            <span className="p-4">Explore</span>
+            <span className="p-4 hidden md:inline">Explore</span>
           </NavLink>
           <NavLink
             to={auth?.token ? "/bookmarks" : "/login"}
@@ -35,7 +35,7 @@ export function LeftSideNav() {
             }
           >
             <i className="fi fi-rs-bookmark"></i>
-            <span className="p-4">Bookmarks</span>
+            <span className="p-4 hidden md:inline">Bookmarks</span>
           </NavLink>
           <NavLink
             to={auth?.token ? `/users/${auth?.user?.username}` : `/login`}
@@ -44,15 +44,36 @@ export function LeftSideNav() {
             }
           >
             <i className="fi fi-rs-user"></i>
-            <span className="p-4">Profile</span>
+            <span className="p-4 hidden md:inline">Profile</span>
           </NavLink>
         </div>
-        <div className="flex text-center my-3 items-start w-full">
+        <div className="hidden md:flex text-center my-3 items-start w-full ">
           <button
             type="button"
-            className="p-3 border-transparent rounded-sm bg-teal-700 text-white"
+            className="p-3 border-transparent rounded-sm bg-teal-700 text-white  hidden md:block"
           >
             Create a Post
+          </button>
+        </div>
+        <div className="md:hidden text-center my-3 items-start fixed bottom-20 right-4">
+          <button
+            type="button"
+            className="p-3 border-transparent rounded-full bg-teal-500/100 hover:bg-teal-800 text-white md:hidden "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
           </button>
         </div>
       </div>
