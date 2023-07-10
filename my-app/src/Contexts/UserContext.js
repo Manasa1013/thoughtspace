@@ -21,7 +21,7 @@ export function UserProvider({ children }) {
   });
   const { showToastBar } = useToast();
   const {
-    auth: { token, user: authUser },
+    auth: { token, user: authUser, logoutHandler },
   } = useAuth();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -143,7 +143,7 @@ export function UserProvider({ children }) {
       setIsLoading(() => true);
       const response = await fetch(`/api/users/bookmark/`, {
         method: "GET",
-        headers: { authorization: token },
+        headers: { authorization: token || localStorage?.getItem("token") },
       });
       const { bookmarks } = await response.json();
       console.log({ response }, "at fetchUserBookmarks");

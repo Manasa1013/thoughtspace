@@ -13,7 +13,7 @@ export function Home() {
   const { fetchUserPosts, state, isLiked } = usePost();
 
   const {
-    auth: { user },
+    auth: { user, token },
   } = useAuth();
   useEffect(() => {
     fetchUserPosts(user?.username)
@@ -23,22 +23,26 @@ export function Home() {
       .catch((err) => {
         console.error(err, "error at fetching user posts");
       });
-  }, [isLiked]);
+  }, [isLiked, user?.username]);
   return (
     <>
-      <div className="grid-container">
-        <Navbar />
-        <aside className="bg-white aside-left">
-          <LeftSideNav />
-        </aside>
-        <main className="main">
-          <NewPost />
-          <PostList posts={state?.posts} />
-        </main>
-        <aside className="bg-white aside-right">
-          <RightSideNav posts={state?.posts} />
-        </aside>
-      </div>
+      {token ? (
+        <div className="grid-container">
+          <Navbar />
+          <aside className="bg-white aside-left">
+            <LeftSideNav />
+          </aside>
+          <main className="main">
+            <NewPost />
+            <PostList posts={state?.posts} />
+          </main>
+          <aside className="bg-white aside-right">
+            <RightSideNav posts={state?.posts} />
+          </aside>
+        </div>
+      ) : (
+        "Login "
+      )}
     </>
   );
 }

@@ -77,7 +77,7 @@ export function UserProfile({ username }) {
   const { auth, setAuth, logoutHandler } = useAuth();
   const { state: userState, getUserByName } = useUser();
   const { state: postState, fetchUserPosts } = usePost();
-  const foundUser = getUserByName(username) ?? logoutHandler();
+  const foundUser = getUserByName(username);
   useEffect(() => {
     fetchUserPosts(username)
       .then((res) => {
@@ -113,6 +113,9 @@ export function UserProfile({ username }) {
                   {foundUser?.bio}
                 </p>
               </div>
+              {auth?.user?.username === foundUser?.username && (
+                <LogoutBlock foundUser={foundUser} />
+              )}
               <FollowDetails user={foundUser} />
               <div className="py-1 my-1 text-blue-500 text-sm break-all">
                 {foundUser?.website}
@@ -130,6 +133,22 @@ export function UserProfile({ username }) {
   );
 }
 
+export function LogoutBlock({ foundUser }) {
+  const { logoutHandler } = useAuth();
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center">
+        <button
+          type="button"
+          onClick={() => logoutHandler()}
+          className="text-teal-500 hover:text-teal-700 border-2 border-transparent hover:border-2 hover:border-teal-700 rounded-md p-2 text-lg font-medium"
+        >
+          Logout
+        </button>
+      </div>
+    </>
+  );
+}
 export function FollowDetails({ user }) {
   const { auth } = useAuth();
   const { followUserHandler, unfollowUserHandler } = useUser();

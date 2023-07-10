@@ -20,6 +20,7 @@ export function Bookmarks() {
     isUserLoading,
     userBookmarks,
     setUserBookmarks,
+    user: currentUser,
   } = useUser();
   const {
     auth: { user },

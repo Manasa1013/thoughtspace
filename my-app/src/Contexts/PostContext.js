@@ -43,6 +43,8 @@ export function PostProvider({ children }) {
       if (response.status === 200) {
         dispatch({ type: "SET_POSTS", payload: posts });
         return posts;
+      } else if (response.status === 500) {
+        showToastBar("Error at server,try again");
       }
     } catch (err) {
       console.error("error at fetching posts");
