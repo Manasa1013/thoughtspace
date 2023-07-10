@@ -10,7 +10,8 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: "xhzTkUi2Nt",
-    content: "hello literally everyone",
+    content:
+      "You’re braver than you believe, and stronger than you seem, and smarter than you think.",
     mediaURL: "",
     likes: {
       likeCount: 5,
@@ -21,7 +22,7 @@ export const posts = [
       {
         _id: "okzxcf",
         username: "jackwilliam",
-        text: "Hey Taylor!!",
+        text: "Good one!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -34,7 +35,7 @@ export const posts = [
   },
   {
     _id: "siFFxfYI1s",
-    content: "Started my poetry! Let's get this started",
+    content: "Positive anything is better than negative nothing.",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/video/upload/v1652188886/upload-socialmedia/oikev6eomsgahnvxcijd.mp4",
     likes: {
@@ -75,7 +76,7 @@ export const posts = [
   {
     _id: "MTYtVhecCj",
     content:
-      "You are never too old to set another goal or to dream a new dream.",
+      "The struggle you’re in today is developing the strength you need tomorrow.",
     mediaURL: "",
     likes: {
       likeCount: 5,
@@ -89,9 +90,9 @@ export const posts = [
   },
   {
     _id: "3XHvLP9kC",
-    content: "Yayy! Its my Birthday Today. Made this cake for myself!",
-    mediaURL:
-      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647064336/ecommerce/chocolatecake4.webp",
+    content:
+      "The happiness of your life depends upon the quality of your thoughts",
+    mediaURL: "",
     likes: {
       likeCount: 2,
       likedBy: [],
@@ -101,7 +102,7 @@ export const posts = [
       {
         _id: "EO7iOPN9n8",
         username: "michaelsmith",
-        text: "Happy Birthday! Enjoy your Day!!",
+        text: "Nice one!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -110,7 +111,7 @@ export const posts = [
       {
         _id: "QK52wf6HI1",
         username: "jackwilliam",
-        text: "Wow! Looks Amazzing! Happy Birthday!",
+        text: "Much needed this!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -124,7 +125,7 @@ export const posts = [
   {
     _id: "tHaThLyFQh",
     content:
-      "Life has got all those twists and turns. You’ve got to hold on tight and off you go.",
+      "The more you praise and celebrate your life, the more there is in life to celebrate.",
     mediaURL: "",
     likes: {
       likeCount: 2,
@@ -138,7 +139,8 @@ export const posts = [
   },
   {
     _id: "G-Gi3lSZP9",
-    content: "When you have a dream, you’ve got to grab it and never let go.",
+    content:
+      "A truly happy person is one who can enjoy the scenery while on a detour.",
     mediaURL: "",
     likes: {
       likeCount: 2,
@@ -153,7 +155,7 @@ export const posts = [
   {
     _id: "GeMUAdi9mh",
     content:
-      "No matter what people tell you, words and ideas can change the world.",
+      "Winning is fun, but those moments that you can touch someone’s life in a very positive way are better.",
     mediaURL: "",
     likes: {
       likeCount: 2,
@@ -167,7 +169,8 @@ export const posts = [
   },
   {
     _id: "IyUlYXTrzZ",
-    content: "Who's up for Pineapple Pastry?",
+    content:
+      "Be so happy that, when other people look at you, they become happy too.",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647064828/ecommerce/pineapplemuffin1.webp",
     likes: {
@@ -179,7 +182,7 @@ export const posts = [
       {
         _id: "6nIffvImxo",
         username: "mihirajonas",
-        text: "Oh! That looks Delicious!",
+        text: "Great one!!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -216,7 +219,8 @@ export const posts = [
   },
   {
     _id: "xhzTkUyfNt",
-    content: "Believe in yourself! Rest all will fall in place.",
+    content:
+      "Wherever you go, no matter what the weather, always bring your own sunshine.",
     mediaURL: "",
     likes: {
       likeCount: 2,
@@ -240,8 +244,7 @@ export const posts = [
   },
   {
     _id: "CCmJpDnnQQ",
-    content:
-      "You can get everything in life you want if you will just help enough other people get what they want.",
+    content: "You always pass failure on the way to success.",
     mediaURL: "",
     likes: {
       likeCount: 5,
@@ -257,7 +260,7 @@ export const posts = [
   {
     _id: "Z_TZT_3EAw",
     content:
-      "If you believe something needs to exist, if it's something you want to use yourself, don't let anyone ever stop you from doing it.",
+      "The sun himself is weak when he first rises, and gathers strength and courage as the day gets on.",
     mediaURL: "",
     likes: {
       likeCount: 5,
@@ -272,7 +275,7 @@ export const posts = [
 
   {
     _id: "e-knMEsoLq",
-    content: "More is lost by indecision than wrong decision.",
+    content: "If opportunity doesn’t knock, build a door",
     mediaURL: "",
     likes: {
       likeCount: 5,
@@ -287,8 +290,7 @@ export const posts = [
 
   {
     _id: "VY14RsXC7G",
-    content:
-      "The reason we struggle with insecurity is because we compare our behind-the-scenes with everyone else’s highlight reel.",
+    content: "Success is the sum of small efforts repeated day in and day out.",
     mediaURL: "",
     likes: {
       likeCount: 7,
@@ -365,8 +367,7 @@ export const posts = [
 
   {
     _id: "G5xd30tMCR",
-    content:
-      "Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.",
+    content: "It always seems impossible until it is done.",
     mediaURL: "",
     likes: {
       likeCount: 8,
@@ -397,8 +398,7 @@ export const posts = [
 
   {
     _id: "stfTkUi2Nt",
-    content:
-      "“Do not wait for the perfect time and place to enter, for you are already onstage.",
+    content: "The only time you fail is when you fall down and stay down.",
     mediaURL: "",
     likes: {
       likeCount: 25,
@@ -413,7 +413,8 @@ export const posts = [
 
   {
     _id: "quiTkUi2Nt",
-    content: "It is a rough road that leads to the heights of greatness.",
+    content:
+      "In every day, there are 1,440 minutes. That means we have 1,440 daily opportunities to make a positive impact.",
     mediaURL: "",
     likes: {
       likeCount: 8,
