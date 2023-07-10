@@ -9,7 +9,7 @@ export function EditProfile({ user, showEditUserModal, setShowEditUserModal }) {
   return (
     <>
       <section className="flex flex-col justify-center items-center gap-2 modal fixed inset-0 z-10 max-h-full overflow-y-auto overflow-x-hidden drop-shadow">
-        <section className="md:w-1/4 md:h-1/2 w-2/3 h-auto">
+        <section className="md:w-1/2 md:h-1/2 w-2/3 h-auto">
           <article className="modal-content bg-teal-100 ">
             <div className="modal-body flex flex-col gap-2 ">
               <form
@@ -78,25 +78,34 @@ export function EditProfile({ user, showEditUserModal, setShowEditUserModal }) {
                     }}
                   />
                 </div>
-                <textarea
-                  name=""
-                  id=""
-                  cols="40"
-                  rows="3"
-                  className="w-full bg-teal-100/50 p-4  text-lg border-none resize-none"
-                  placeholder="Edit Bio..."
-                  spellCheck="false"
-                  data-ms-editor="true"
-                  value={editUser?.bio}
-                  onChange={(e) => {
-                    console.log(e.target.value);
+                <div>
+                  <label
+                    htmlFor="bio"
+                    name="bio"
+                    className="text-gray-900 block pr-3 py-2 text-sm md:text-base"
+                  >
+                    Bio
+                  </label>
+                  <textarea
+                    name="bio"
+                    id="bio"
+                    cols="40"
+                    rows="3"
+                    className="w-full bg-white p-2  text-md rounded-md border-none resize-none"
+                    placeholder="Edit Bio..."
+                    spellCheck="false"
+                    data-ms-editor="true"
+                    value={editUser?.bio}
+                    onChange={(e) => {
+                      console.log(e.target.value);
 
-                    setEditUser((prev) => ({
-                      ...prev,
-                      bio: e.target.value,
-                    }));
-                  }}
-                ></textarea>
+                      setEditUser((prev) => ({
+                        ...prev,
+                        bio: e.target.value,
+                      }));
+                    }}
+                  ></textarea>
+                </div>
                 <button
                   type="submit"
                   className="p-2 border-2 border-teal-700 text-md bg-teal-700/80 text-gray-100 hover:text-white rounded-sm hover:bg-teal-700/100"

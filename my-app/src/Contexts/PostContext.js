@@ -42,6 +42,7 @@ export function PostProvider({ children }) {
       const { posts } = await response.json();
       if (response.status === 200) {
         dispatch({ type: "SET_POSTS", payload: posts });
+        return posts;
       }
     } catch (err) {
       console.error("error at fetching posts");

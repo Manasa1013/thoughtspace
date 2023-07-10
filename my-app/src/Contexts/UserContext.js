@@ -270,7 +270,7 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [token]);
   async function isBookmarkedByUser(postId) {
     try {
       console.log(

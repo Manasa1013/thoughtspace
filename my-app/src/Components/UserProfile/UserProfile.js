@@ -77,7 +77,7 @@ export function UserProfile({ username }) {
   const { auth, setAuth, logoutHandler } = useAuth();
   const { state: userState, getUserByName } = useUser();
   const { state: postState, fetchUserPosts } = usePost();
-  const foundUser = getUserByName(username);
+  const foundUser = getUserByName(username) ?? logoutHandler();
   useEffect(() => {
     fetchUserPosts(username)
       .then((res) => {
