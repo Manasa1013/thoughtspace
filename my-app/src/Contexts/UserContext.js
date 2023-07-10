@@ -38,30 +38,23 @@ export function UserProvider({ children }) {
         headers: { authorization: token },
         body: JSON.stringify({ postData: post }),
       });
-      console.log({ response });
       const { bookmarks, isBookmarked } = await response.json();
 
-      console.log({ state: state });
       if (response.status === 200) {
-        console.log({ bookmarks });
         dispatch({
           type: "BOOKMARK_POST",
           payload: { bookmarks: bookmarks, username: username },
         });
         showToastBar("Added to Bookmarks");
       } else if (response.status === 500) {
-        console.log({ bookmarks });
         showToastBar("Error at server , Please try again");
       } else if (response.status === 404) {
-        console.log({ bookmarks });
         showToastBar("Login to bookmark");
       } else if (response.status === 400) {
-        console.log({ bookmarks });
         showToastBar("Already bookmarked");
       }
       return isBookmarked;
     } catch (err) {
-      console.error(err, "at bookmarkPostHandler in UserContext");
       showToastBar("Error! Try again");
     } finally {
       setIsLoading(() => false);
@@ -77,29 +70,22 @@ export function UserProvider({ children }) {
         headers: { authorization: token },
         body: JSON.stringify({ postData: post }),
       });
-      console.log({ response });
       const { bookmarks } = await response.json();
-      console.log({ state: state });
       if (response.status === 200) {
-        console.log({ bookmarks });
         dispatch({
           type: "REMOVE_BOOKMARK",
           payload: { bookmarks: bookmarks, username: username },
         });
         showToastBar("Removed from bookmarks");
       } else if (response.status === 500) {
-        console.log({ bookmarks });
         showToastBar("Error at server , Please try again");
       } else if (response.status === 404) {
-        console.log({ bookmarks });
         showToastBar("Login to remove from bookmarks");
       } else if (response.status === 400) {
-        console.log({ bookmarks });
         showToastBar("Already removed from bookmarks");
       }
       return isBookmarked;
     } catch (err) {
-      console.error(err, "at bookmarkPostHandler in UserContext");
       showToastBar("Error! Try again");
     } finally {
       setIsLoading(() => false);
@@ -146,7 +132,6 @@ export function UserProvider({ children }) {
         headers: { authorization: token || localStorage?.getItem("token") },
       });
       const { bookmarks } = await response.json();
-      console.log({ response }, "at fetchUserBookmarks");
 
       if (response.status === 200) {
         dispatch({

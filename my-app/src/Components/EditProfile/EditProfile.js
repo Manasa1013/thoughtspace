@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import { avatarOptions } from "../../utils/CommonFunctions";
 import { useToast } from "../../Contexts/ToastContext";
 import { useUser } from "../../Contexts/UserContext";
 
@@ -6,6 +8,7 @@ export function EditProfile({ user, showEditUserModal, setShowEditUserModal }) {
   const { showToastBar } = useToast();
   const { editUserHandler } = useUser();
   const [editUser, setEditUser] = useState(user);
+  const [showAvatar, setShowAvatar] = useState(false);
   return (
     <>
       <section className="flex flex-col justify-center items-center gap-2 modal fixed inset-0 z-10 max-h-full overflow-y-auto overflow-x-hidden drop-shadow">
@@ -16,7 +19,10 @@ export function EditProfile({ user, showEditUserModal, setShowEditUserModal }) {
                 className=" flex flex-col gap-2 p-3 mx-2 mt-2 focus:outline-teal-700/80"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if (editUser?.bio?.length === 0) {
+                  if (
+                    editUser?.bio?.length === 0 ||
+                    editUser?.avatarUrl?.length === 0
+                  ) {
                     showToastBar("Something to be written in bio...");
 
                     return;
@@ -32,52 +38,29 @@ export function EditProfile({ user, showEditUserModal, setShowEditUserModal }) {
               >
                 <div>
                   <label
-                    htmlFor="first-name"
+                    htmlFor="website"
                     className="text-gray-900 block pr-3 py-2 text-sm md:text-base"
                   >
-                    First Name
+                    Portfolio
                   </label>
                   <input
-                    id="first-name"
-                    name="first-name"
-                    value={editUser?.firstName}
-                    type="text"
+                    id="website"
+                    name=""
+                    value={editUser?.website}
+                    type="url"
                     required
                     className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
-                    placeholder="FirstName"
+                    placeholder="Portfolio"
                     onInput={(e) => {
                       // console.log(e.target.value, "firstName");
                       return setEditUser((prev) => ({
                         ...prev,
-                        firstName: e.target.value,
+                        website: e.target.value,
                       }));
                     }}
                   />
                 </div>
-                <div>
-                  <label
-                    htmlFor="last-name"
-                    className="text-gray-900 block pr-3 py-2 text-sm md:text-base"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    id="last-name"
-                    name="last-name"
-                    type="text"
-                    value={editUser?.lastName}
-                    required
-                    className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
-                    placeholder="LastName"
-                    onInput={(e) => {
-                      // console.log(e.target.value, "username");
-                      return setEditUser((prev) => ({
-                        ...prev,
-                        lastName: e.target.value,
-                      }));
-                    }}
-                  />
-                </div>
+
                 <div>
                   <label
                     htmlFor="bio"

@@ -45,6 +45,7 @@ export const users = [
     email: "jack@gmail.com",
     bio: "Hey all! Let's connect",
     bookmarks: [],
+
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651554256/socialmedia/avatars/jane-doe_il3cvx.webp",
     website: "https://manasamandalreddy.netlify.app/",
@@ -75,7 +76,9 @@ export const users = [
     email: "taylor@gmail.com",
     bio: "Born Singer",
     bookmarks: [],
-    avatarUrl: "",
+    avatarUrl:
+      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651563581/socialmedia/avatars/carl-smith_mehw0u.webp",
+    website: "https://manasamandalreddy.netlify.app/",
     createdAt: "2023-06-20T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -91,7 +94,8 @@ export const users = [
     bookmarks: [],
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652525373/socialmedia/avatars/alex-maxwell.webp",
-    website: "",
+    website: "https://google.com/",
+
     createdAt: "2023-06-20T10:55:06+05:30",
     updatedAt: formatDate(),
   },
@@ -107,7 +111,7 @@ export const users = [
     bookmarks: [],
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652525510/socialmedia/avatars/sophia-jones.webp",
-    website: "",
+    website: "https://google.com/",
     createdAt: "2023-06-21T10:55:06+05:30",
     updatedAt: formatDate(),
   },

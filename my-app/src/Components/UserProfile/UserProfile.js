@@ -118,7 +118,7 @@ export function UserProfile({ username }) {
               )}
               <FollowDetails user={foundUser} />
               <div className="py-1 my-1 text-blue-500 text-sm break-all">
-                {foundUser?.website}
+                <a href={foundUser?.website}>Portfolio</a>
               </div>
             </div>
           </div>

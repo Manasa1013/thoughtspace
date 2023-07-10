@@ -1,3 +1,4 @@
+import { formatDate } from "../backend/utils/authUtils";
 export function getDateText(createdAt) {
   let difference = new Date().getTime() - Date.parse(createdAt);
   let differenceForWeeks = (difference / (7 * 24 * 60 * 60 * 1000)) | 0;
@@ -56,3 +57,12 @@ export function validateFields(
     });
   }
 }
+
+export const avatarOptions = [
+  "https://res.cloudinary.com/dtrjdcrme/image/upload/…734/socialmedia/avatars/adarsh-balika_dct6gm.webp",
+  "https://res.cloudinary.com/dtrjdcrme/image/upload/…51554207/socialmedia/avatars/john-doe_gbkuda.webp",
+  "https://res.cloudinary.com/dtrjdcrme/image/upload/…51554256/socialmedia/avatars/jane-doe_il3cvx.webp",
+  "https://res.cloudinary.com/dtrjdcrme/image/upload/…563581/socialmedia/avatars/carl-smith_mehw0u.webp",
+  "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652525373/socialmedia/avatars/alex-maxwell.webp",
+  "https://res.cloudinary.com/dtrjdcrme/image/upload/v1652525510/socialmedia/avatars/sophia-jones.webp",
+];
