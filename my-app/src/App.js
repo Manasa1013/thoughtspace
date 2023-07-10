@@ -35,7 +35,7 @@ function App() {
     }, 3000);
     return () => clearTimeout(timer);
   }, [toast, hideToastBar]);
-
+  console.clear();
   return (
     <div className="App">
       <Routes>
