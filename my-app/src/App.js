@@ -11,7 +11,14 @@ import {
   PostDetails,
   Loader,
 } from "./Components";
-import { Bookmarks, Explore, Home, Profile, SinglePostPage } from "./Pages";
+import {
+  Bookmarks,
+  Explore,
+  Home,
+  NotFound,
+  Profile,
+  SinglePostPage,
+} from "./Pages";
 import "./App.css";
 import { useToast } from "./Contexts/ToastContext";
 import { Toast } from "./Components/Toast/Toast";
@@ -41,12 +48,23 @@ function App() {
           element={auth.token ? <Home /> : <Signup />}
         ></Route>
 
-        <Route path="/posts/:postId" element={<SinglePostPage />}></Route>
+        <Route
+          path="/posts/:postId"
+          element={
+            <>
+              <RequireAuth>
+                <SinglePostPage />
+              </RequireAuth>
+            </>
+          }
+        ></Route>
         <Route
           path="/"
           element={
             <>
-              <Home />
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
             </>
           }
         ></Route>
@@ -54,7 +72,9 @@ function App() {
           path="/explore"
           element={
             <>
-              <Explore />
+              <RequireAuth>
+                <Explore />
+              </RequireAuth>
             </>
           }
         ></Route>
@@ -78,7 +98,7 @@ function App() {
           path="*"
           element={
             <>
-              <Home />
+              <NotFound />
             </>
           }
         ></Route>

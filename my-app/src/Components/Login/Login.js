@@ -9,6 +9,7 @@ export function Login() {
   const [loginErrorField, setLoginErrorField] = useState({
     userNameError: "",
     passwordError: "",
+    confirmPasswordError: "",
   });
 
   const [showLoginPassword, setShowLoginPassword] = useState(false);
@@ -54,12 +55,14 @@ export function Login() {
     try {
       if (
         loginErrorField.userNameError.length > 0 ||
-        loginErrorField.passwordError.length > 0
+        loginErrorField.passwordError.length > 0 ||
+        loginErrorField.confirmPasswordError.length > 0
       ) {
         showToastBar("Please enter valid credentials");
       } else if (
         loginField.username.length <= 0 ||
-        loginField.password.length <= 0
+        loginField.password.length <= 0 ||
+        loginField.confirmPassword.length <= 0
       ) {
         showToastBar("Please enter credentials to log in");
         return;
@@ -97,6 +100,7 @@ export function Login() {
       ...prev,
       username: "",
       password: "",
+      confirmPassword: "",
     }));
   }
 
@@ -199,6 +203,49 @@ export function Login() {
                 {loginErrorField.passwordError}
               </p>
             </div>
+            <div>
+              <label
+                htmlFor="confirm-password"
+                className="text-gray-900 block pr-3 pb-3 pt-3"
+              >
+                Confirm Password
+              </label>
+              <input
+                id="confirm-password"
+                name="confirm-password"
+                type={showLoginPassword ? "text" : "password"}
+                value={loginField.confirmPassword}
+                autoComplete="confirm-password"
+                required
+                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
+                placeholder="theWay^OfWater2"
+                onInput={(e) => {
+                  // console.log(e.target.value, "username");
+                  return setLoginField((prev) => ({
+                    ...prev,
+                    confirmPassword: e.target.value,
+                  }));
+                }}
+                onBlur={(e) => {
+                  // console.log("the username field lost focus");
+                  let errorAlertMessage = "Must match with the password";
+                  if (loginField.password === loginField.confirmPassword) {
+                    setLoginErrorField((prev) => ({
+                      ...prev,
+                      confirmPasswordError: "",
+                    }));
+                  } else {
+                    setLoginErrorField((prev) => ({
+                      ...prev,
+                      confirmPasswordError: errorAlertMessage,
+                    }));
+                  }
+                }}
+              />
+              <p className="text-sm text-pink-600">
+                {loginErrorField.confirmPasswordError}
+              </p>
+            </div>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -226,10 +273,12 @@ export function Login() {
                   ...prev,
                   username: "Taylor_Swift",
                   password: "Taylor@1",
+                  confirmPassword: "Taylor@1",
                 }));
                 guestLoginSubmitHandler({
                   username: "Taylor_Swift",
                   password: "Taylor@1",
+                  confirmPassword: "Taylor@1",
                 });
               }}
             >

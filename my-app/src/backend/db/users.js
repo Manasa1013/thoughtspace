@@ -12,6 +12,7 @@ export const users = [
     lastName: "Balika",
     username: "adarshbalika",
     password: "Adarshbalika@123",
+    email: "adarsh@gmail.com",
     bio: "Redefining!",
     bookmarks: [],
     avatarUrl:
@@ -26,6 +27,7 @@ export const users = [
     lastName: "Robert",
     username: "jamesrobert",
     password: "Jamesrobert@123",
+    email: "james@gmail.com",
     bio: "Live love and laugh",
     bookmarks: [],
     avatarUrl:
@@ -40,6 +42,7 @@ export const users = [
     lastName: "William",
     username: "jackwilliam",
     password: "Jackwilliam@123",
+    email: "jack@gmail.com",
     bio: "Hey all! Let's connect",
     bookmarks: [],
     avatarUrl:
@@ -54,6 +57,7 @@ export const users = [
     lastName: "Smith",
     username: "michaelsmith",
     password: "Michaelsmith@123",
+    email: "michael@gmail.com",
     bio: "Rock and Roll",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651563581/socialmedia/avatars/carl-smith_mehw0u.webp",
@@ -68,6 +72,7 @@ export const users = [
     lastName: "Swift",
     username: "Taylor_Swift",
     password: "Taylor@1",
+    email: "taylor@gmail.com",
     bio: "Born Singer",
     bookmarks: [],
     avatarUrl: "",
@@ -81,6 +86,7 @@ export const users = [
     lastName: "Duo",
     username: "henryduo",
     password: "Henryduo@123",
+    email: "henry@gmail.com",
     bio: "Believer",
     bookmarks: [],
     avatarUrl:
@@ -96,6 +102,7 @@ export const users = [
     lastName: "Jonas",
     username: "mihirajonas",
     password: "Mihirajonas@123",
+    email: "mihira@gmail.com",
     bio: "I am",
     bookmarks: [],
     avatarUrl:

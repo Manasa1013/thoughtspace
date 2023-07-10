@@ -13,6 +13,8 @@ export const Signup = () => {
     lastNameError: "",
     userNameError: "",
     passwordError: "",
+    emailError: "",
+    confirmPasswordError: "",
   });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -41,7 +43,9 @@ export const Signup = () => {
         errorField.firstNameError.length > 0 ||
         errorField.lastNameError.length > 0 ||
         errorField.userNameError.length > 0 ||
-        errorField.passwordError.length > 0
+        errorField.passwordError.length > 0 ||
+        errorField.emailError.length > 0 ||
+        errorField.confirmPasswordError.length > 0
       ) {
         showToastBar("Please correct errors at the fields");
         return;
@@ -49,7 +53,9 @@ export const Signup = () => {
         field.firstName.length <= 0 ||
         field.lastName.length <= 0 ||
         field.username.length <= 0 ||
-        field.password.length <= 0
+        field.password.length <= 0 ||
+        field.email.length <= 0 ||
+        field.confirmPassword.length <= 0
       ) {
         showToastBar("Please enter details");
         return;
@@ -75,6 +81,8 @@ export const Signup = () => {
       lastName: "",
       username: "",
       password: "",
+      email: "",
+      confirmPassword: "",
     }));
   }
 
@@ -213,6 +221,44 @@ export const Signup = () => {
             </div>
             <div>
               <label
+                htmlFor="email"
+                className="text-gray-900 block pr-3 py-2 md:text-base text-sm"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={field.email}
+                autoComplete="Email"
+                required
+                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
+                placeholder="james@gmail.com"
+                onInput={(e) => {
+                  // console.log(e.target.value, "username");
+                  return setField((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }));
+                }}
+                onBlur={(e) => {
+                  // console.log("the username field lost focus");
+                  let errorAlertMessage = "Give proper email address";
+                  validateFields(
+                    emailRegexPattern,
+                    field.email,
+                    "emailError",
+                    errorAlertMessage,
+                    errorField,
+                    setErrorField
+                  );
+                }}
+              />
+              <p className="text-sm text-pink-600">{errorField.emailError}</p>
+            </div>
+            <div>
+              <label
                 htmlFor="password"
                 className="text-gray-900 block pr-3 pb-2 pt-2 text-sm md:text-base"
               >
@@ -250,6 +296,50 @@ export const Signup = () => {
               />
               <p className="text-sm text-pink-600">
                 {errorField.passwordError}
+              </p>
+            </div>
+            <div>
+              <label
+                htmlFor="confirm-password"
+                className="text-gray-900 block pr-3 pb-2 pt-2 text-sm md:text-base"
+              >
+                Confirm Password
+              </label>
+              <input
+                id="confirm-password"
+                name="confirm-password"
+                type={showPassword ? "text" : "password"}
+                value={field.confirmPassword}
+                autoComplete="confirm-password"
+                required
+                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
+                placeholder="theWay^OfWater2"
+                onInput={(e) => {
+                  // console.log(e.target.value, "username");
+                  return setField((prev) => ({
+                    ...prev,
+                    confirmPassword: e.target.value,
+                  }));
+                }}
+                onBlur={(e) => {
+                  // console.log("the username field lost focus");
+                  let errorAlertMessage =
+                    "Must match with the current password";
+                  if (field.password === field.confirmPassword) {
+                    setErrorField((prev) => ({
+                      ...prev,
+                      confirmPasswordError: "",
+                    }));
+                  } else {
+                    setErrorField((prev) => ({
+                      ...prev,
+                      confirmPasswordError: errorAlertMessage,
+                    }));
+                  }
+                }}
+              />
+              <p className="text-sm text-pink-600">
+                {errorField.confirmPasswordError}
               </p>
             </div>
           </div>

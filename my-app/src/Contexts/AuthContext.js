@@ -23,23 +23,35 @@ export function AuthProvider({ children }) {
       username: JSON.parse(localStorage.getItem("user"))
         ? JSON.parse(localStorage.getItem("user"))?.username
         : "",
+      email: JSON.parse(localStorage.getItem("user"))
+        ? JSON.parse(localStorage.getItem("user"))?.email
+        : "",
+
     },
   });
   const [field, setField] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    password: "",
+    firstName: "James",
+    lastName: "Cameron",
+    username: "James_Cameron",
+    password: "James@123",
+    confirmPassword: "James@123",
+    email: "james@gmail.com",
+    bio: "Hey All! Let's connect and share our thoughts!",
+    avatarUrl:
+      "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651473734/socialmedia/avatars/adarsh-balika_dct6gm.webp",
+    website: "https://manasamandalreddy.netlify.app/",
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   const [loginField, setLoginField] = useState({
     username: "",
     password: "",
+    confirmPassword: "",
   });
   const { showToastBar } = useToast();
 
   async function logoutHandler() {
     try {
+      setIsLoading(() => true);
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       setAuth(() => ({
@@ -50,11 +62,13 @@ export function AuthProvider({ children }) {
       navigate("/");
     } catch (err) {
       console.error(err, "while logging out error");
+    } finally {
+      setIsLoading(() => false);
     }
   }
   async function loginHandler(user) {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
       const response = await fetch("/api/auth/login", {
         method: "POST",
         body: JSON.stringify(user),
@@ -73,6 +87,7 @@ export function AuthProvider({ children }) {
             firstName: data.foundUser.firstName,
             lastName: data.foundUser.lastName,
             username: data.foundUser.username,
+            email: data.foundUser.email,
           },
         }));
         console.log({ location });
@@ -89,12 +104,13 @@ export function AuthProvider({ children }) {
       showToastBar("Error in logging in at authcontext");
       return err;
     } finally {
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   }
 
   async function signupHandler() {
     try {
+      setIsLoading(() => true);
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         body: JSON.stringify(field),
@@ -114,6 +130,10 @@ export function AuthProvider({ children }) {
             firstName: data.createdUser.firstName,
             lastName: data.createdUser.lastName,
             username: data.createdUser.username,
+            email: data.createdUser.email,
+            bio: data.createdUser.bio,
+            avatarUrl: data.createdUser.avatarUrl,
+            website: data.createdUser.website,
           },
         }));
         console.log({ location });
@@ -128,6 +148,8 @@ export function AuthProvider({ children }) {
     } catch (err) {
       showToastBar("Error in signing up");
       console.error(err, "at catch of signupHandler");
+    } finally {
+      setIsLoading(() => false);
     }
   }
   return (
@@ -142,6 +164,8 @@ export function AuthProvider({ children }) {
         field,
         setField,
         signupHandler,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
